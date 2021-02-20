@@ -1,5 +1,5 @@
 import React from 'react';
-import {Alert, View} from 'react-native';
+import {Alert, View, StyleSheet} from 'react-native';
 import PropTypes from 'prop-types';
 import {useLogin, useUser} from '../hooks/ApiHooks';
 import useSignUpForm from '../hooks/RegisterHooks';
@@ -55,6 +55,7 @@ const RegisterForm = ({navigation}) => {
           handleInputEnd('username', event.nativeEvent.text);
         }}
         errorMessage={registerErrors.username}
+        inputContainerStyle={styles.inputText}
       />
       <Input
         autoCapitalize="none"
@@ -65,6 +66,7 @@ const RegisterForm = ({navigation}) => {
         }
         secureTextEntry={true}
         errorMessage={registerErrors.password}
+        inputContainerStyle={styles.inputText}
       />
       <Input
         autoCapitalize="none"
@@ -75,6 +77,7 @@ const RegisterForm = ({navigation}) => {
         }
         secureTextEntry={true}
         errorMessage={registerErrors.confirmPassword}
+        inputContainerStyle={styles.inputText}
       />
       <Input
         autoCapitalize="none"
@@ -84,6 +87,7 @@ const RegisterForm = ({navigation}) => {
           handleInputEnd('email', event.nativeEvent.text)
         }
         errorMessage={registerErrors.email}
+        inputContainerStyle={styles.inputText}
       />
       <Input
         autoCapitalize="none"
@@ -93,12 +97,34 @@ const RegisterForm = ({navigation}) => {
           handleInputEnd('full_name', event.nativeEvent.text)
         }
         errorMessage={registerErrors.full_name}
+        inputContainerStyle={styles.inputText}
       />
-      <Button title="Register!" onPress={doRegister} />
+      <Button
+        title="Register!"
+        onPress={doRegister}
+        buttonStyle={styles.button}
+      />
     </View>
   );
 };
-
+const styles = StyleSheet.create({
+  inputText: {
+    borderColor: '#D4CCC4',
+    borderWidth: 1,
+    borderRadius: 10,
+    paddingLeft: 16,
+    height: 55,
+  },
+  button: {
+    backgroundColor: '#0E2A25',
+    marginTop: 20,
+    width: 179,
+    height: 57,
+    borderRadius: 10,
+    marginHorizontal: '20%',
+    marginBottom: 20,
+  },
+});
 RegisterForm.propTypes = {
   navigation: PropTypes.object,
 };
