@@ -14,7 +14,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useMedia, useTag} from '../hooks/ApiHooks';
 import {MainContext} from '../contexts/MainContext';
 import {appIdentifier} from '../utils/variables';
-import {Video} from 'expo-av';
+import {Audio, Video} from 'expo-av';
 
 const Upload = ({navigation}) => {
   const [image, setImage] = useState(null);
@@ -41,6 +41,7 @@ const Upload = ({navigation}) => {
       name: filename,
       type: type,
     });
+    console.log(type);
     try {
       setIsUploading(true);
       const userToken = await AsyncStorage.getItem('userToken');
@@ -93,15 +94,25 @@ const Upload = ({navigation}) => {
   const pickImage = async (library) => {
     let result = null;
     const options = {
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
       aspect: [1, 1],
       quality: 0.5,
     };
-    if (library) {
-      result = await ImagePicker.launchImageLibraryAsync(options);
+    if (library === 'library') {
+      const source = {...options, mediaTypes: ImagePicker.MediaTypeOptions.All};
+      result = await ImagePicker.launchImageLibraryAsync(source);
+    } else if (library === 'photo') {
+      const source = {
+        ...options,
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      };
+      result = await ImagePicker.launchCameraAsync(source);
     } else {
-      result = await ImagePicker.launchCameraAsync(options);
+      const source = {
+        ...options,
+        mediaTypes: ImagePicker.MediaTypeOptions.Videos,
+      };
+      result = await ImagePicker.launchCameraAsync(source);
     }
 
     console.log(result);
@@ -117,6 +128,41 @@ const Upload = ({navigation}) => {
     setImage(null);
     reset();
   };
+
+  const [recording, setRecording] = React.useState();
+
+  async function startRecording() {
+    try {
+      console.log('Requesting permissions..');
+      await Audio.requestPermissionsAsync();
+      await Audio.setAudioModeAsync({
+        allowsRecordingIOS: true,
+        playsInSilentModeIOS: true,
+      });
+      console.log('Starting recording..');
+      const recording = new Audio.Recording();
+      await recording.prepareToRecordAsync(
+        Audio.RECORDING_OPTIONS_PRESET_HIGH_QUALITY
+      );
+      await recording.startAsync();
+      setRecording(recording);
+      console.log('Recording started');
+    } catch (err) {
+      console.error('Failed to start recording', err);
+    }
+  }
+
+  async function stopRecording() {
+    let result = null;
+    console.log('Stopping recording..');
+    setRecording(undefined);
+    result = await recording.stopAndUnloadAsync();
+    const uri = recording.getURI();
+    setFiletype('audio');
+    setImage(uri);
+    //console.log('Recording stopped and stored at', uri);
+  }
+
   return (
     <ScrollView>
       <KeyboardAvoidingView behavior="position" enabled>
@@ -150,9 +196,18 @@ const Upload = ({navigation}) => {
             onChangeText={(txt) => handleInputChange('description', txt)}
             errorMessage={uploadErrors.description}
           />
-          <Button title="Choose from library" onPress={() => pickImage(true)} />
-          <Button title="Use camera" onPress={() => pickImage(false)} />
+          <Button
+            title="Choose from library"
+            onPress={() => pickImage('library')}
+          />
+          <Button title="Take photo" onPress={() => pickImage('photo')} />
+          <Button title="Take video" onPress={() => pickImage('video')} />
+          <Button
+            title={recording ? 'Stop Recording' : 'Start Recording'}
+            onPress={recording ? stopRecording : startRecording}
+          />
           {isUploading && <ActivityIndicator size="large" color="#0000ff" />}
+
           <Button
             title="Upload file"
             onPress={doUpload}
