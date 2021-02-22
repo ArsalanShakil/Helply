@@ -19,7 +19,7 @@ const doFetch = async (url, options = {}) => {
   }
 };
 
-const useLoadMedia = (myFilesOnly, userId) => {
+const useLoadMedia = (searchFilesOnly, userId) => {
   const [mediaArray, setMediaArray] = useState([]);
   const {update} = useContext(MainContext);
 
@@ -32,10 +32,10 @@ const useLoadMedia = (myFilesOnly, userId) => {
           return fileJson;
         })
       );
-      console.log('status myFilesOnly:', myFilesOnly);
+      console.log('status searchFilesOnly:', searchFilesOnly);
 
-      if (myFilesOnly) {
-        media = media.filter((item) => item.user_id === userId);
+      if (searchFilesOnly) {
+        media = media.filter((item) => item.title === 'Shakki');
       }
 
       setMediaArray(media);

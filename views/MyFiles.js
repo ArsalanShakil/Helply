@@ -15,6 +15,7 @@ const MyFiles = ({navigation}) => {
 
 MyFiles.propTypes = {
   navigation: PropTypes.object,
+  myFilesOnly: PropTypes.bool,
 };
 
 export default MyFiles;
