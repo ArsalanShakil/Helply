@@ -7,7 +7,7 @@ import {MainContext} from '../contexts/MainContext';
 
 const Searchlist = ({navigation, searchFilesOnly, searchKeyword}) => {
   const {user} = useContext(MainContext);
-  const mediaArray = useLoadMedia(searchFilesOnly, searchKeyword);
+  const mediaArray = useLoadMedia(searchFilesOnly, searchKeyword, user.user_id);
 
   return (
     <FlatList
@@ -18,8 +18,9 @@ const Searchlist = ({navigation, searchFilesOnly, searchKeyword}) => {
           navigation={navigation}
           singleMedia={item}
           isSearchFile={
-            item.title.toLowerCase().includes(searchKeyword) ||
-            item.description.toLowerCase().includes(searchKeyword)
+            item.user_id === user.user_id &&
+            (item.title.toLowerCase().includes(searchKeyword) ||
+              item.description.toLowerCase().includes(searchKeyword))
           }
         />
       )}

@@ -32,8 +32,6 @@ const useLoadMedia = (myFilesOnly, userId) => {
           return fileJson;
         })
       );
-      console.log('status myFilesOnly:', myFilesOnly);
-
       if (myFilesOnly) {
         media = media.filter((item) => item.user_id === userId);
       }

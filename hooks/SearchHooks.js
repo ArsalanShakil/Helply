@@ -38,8 +38,9 @@ const useLoadMedia = (searchFilesOnly, searchKeyword, userId) => {
       if (searchFilesOnly) {
         media = media.filter(
           (item) =>
-            item.title.toLowerCase().includes(searchKeyword) ||
-            item.description.toLowerCase().includes(searchKeyword)
+            item.user_id === userId &&
+            (item.title.toLowerCase().includes(searchKeyword) ||
+              item.description.toLowerCase().includes(searchKeyword))
         );
       }
 
