@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 const Home = ({navigation}) => {
   return (
     <SafeAreaView style={GlobalStyles.droidSafeArea}>
-      <List navigation={navigation} myFilesOnly={false} />
+      <List navigation={navigation} />
       <StatusBar style="auto" />
     </SafeAreaView>
   );

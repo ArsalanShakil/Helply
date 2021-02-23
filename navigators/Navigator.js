@@ -16,6 +16,7 @@ import {Icon} from 'react-native-elements';
 import Upload from '../views/Upload';
 import MyFiles from '../views/MyFiles';
 import Modify from '../views/Modify';
+import Search from '../views/Search';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -36,6 +37,9 @@ const TabScreen = () => {
             case 'Upload':
               iconName = 'cloud-upload';
               break;
+            case 'Search':
+              iconName = focused ? 'search' : 'search';
+              break;
           }
           return <Icon name={iconName} size={size} color={color} />;
         },
@@ -44,6 +48,7 @@ const TabScreen = () => {
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="Profile" component={Profile} />
       <Tab.Screen name="Upload" component={Upload} />
+      <Tab.Screen name="Search" component={Search} />
     </Tab.Navigator>
   );
 };

@@ -4,11 +4,11 @@ import {uploadsUrl} from '../utils/variables';
 import {Avatar, ListItem as RNEListItem} from 'react-native-elements';
 import {Button} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useMedia} from '../hooks/ApiHooks';
+import {useMedia} from '../hooks/SearchHooks';
 import {MainContext} from '../contexts/MainContext';
 import {Alert} from 'react-native';
 
-const ListItem = ({navigation, singleMedia, isMyFile}) => {
+const SearchListItem = ({navigation, singleMedia, isSearchFile}) => {
   // console.log(props);
   const {deleteFile} = useMedia();
   const {setUpdate, update} = useContext(MainContext);
@@ -59,7 +59,7 @@ const ListItem = ({navigation, singleMedia, isMyFile}) => {
       <RNEListItem.Content>
         <RNEListItem.Title h4>{singleMedia.title}</RNEListItem.Title>
         <RNEListItem.Subtitle>{singleMedia.description}</RNEListItem.Subtitle>
-        {isMyFile && (
+        {isSearchFile && (
           <>
             <Button
               title="Modify"
@@ -77,7 +77,7 @@ const ListItem = ({navigation, singleMedia, isMyFile}) => {
 ListItem.propTypes = {
   singleMedia: PropTypes.object,
   navigation: PropTypes.object,
-  isMyFile: PropTypes.bool,
+  isSearchFile: PropTypes.bool,
 };
 
-export default ListItem;
+export default SearchListItem;
