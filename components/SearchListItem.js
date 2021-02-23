@@ -4,7 +4,7 @@ import {uploadsUrl} from '../utils/variables';
 import {Avatar, ListItem as RNEListItem} from 'react-native-elements';
 import {Button} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useMedia} from '../hooks/ApiHooks';
+import {useMedia} from '../hooks/SearchHooks';
 import {MainContext} from '../contexts/MainContext';
 import {Alert} from 'react-native';
 

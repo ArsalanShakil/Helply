@@ -3,6 +3,8 @@ import {useContext, useEffect, useState} from 'react';
 import {MainContext} from '../contexts/MainContext';
 import {appIdentifier, baseUrl} from '../utils/variables';
 
+import {validator} from '../utils/validator';
+
 // general function for fetching (options default value is empty object)
 const doFetch = async (url, options = {}) => {
   const response = await fetch(url, options);
@@ -19,7 +21,7 @@ const doFetch = async (url, options = {}) => {
   }
 };
 
-const useLoadMedia = (searchFilesOnly, userId) => {
+const useLoadMedia = (searchFilesOnly, searchKeyword, userId) => {
   const [mediaArray, setMediaArray] = useState([]);
   const {update} = useContext(MainContext);
 
@@ -33,9 +35,10 @@ const useLoadMedia = (searchFilesOnly, userId) => {
         })
       );
       console.log('status searchFilesOnly:', searchFilesOnly);
+      console.log('status searchKeyword:', searchKeyword);
 
       if (searchFilesOnly) {
-        media = media.filter((item) => item.title === 'Shakki');
+        media = media.filter((item) => item.title === searchKeyword);
       }
 
       setMediaArray(media);
@@ -47,6 +50,13 @@ const useLoadMedia = (searchFilesOnly, userId) => {
     loadMedia();
   }, [update]);
   return mediaArray;
+};
+
+const useSearchForm = (callback) => {
+  const [input, setInput] = useState({
+    searchKeyword: '',
+  });
+  const [uploadErrors, setUploadErrors] = useState({});
 };
 
 const useLogin = () => {
@@ -200,4 +210,4 @@ const useMedia = () => {
   return {upload, updateFile, deleteFile};
 };
 
-export {useLoadMedia, useLogin, useUser, useTag, useMedia};
+export {useLoadMedia, useLogin, useUser, useTag, useMedia, useSearchForm};

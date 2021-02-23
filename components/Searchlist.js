@@ -5,9 +5,9 @@ import ListItem from './ListItem';
 import PropTypes from 'prop-types';
 import {MainContext} from '../contexts/MainContext';
 
-const Searchlist = ({navigation, searchFilesOnly}) => {
+const Searchlist = ({navigation, searchFilesOnly, searchKeyword}) => {
   const {user} = useContext(MainContext);
-  const mediaArray = useLoadMedia(searchFilesOnly, 'Shakki');
+  const mediaArray = useLoadMedia(searchFilesOnly, searchKeyword);
 
   return (
     <FlatList
@@ -17,7 +17,7 @@ const Searchlist = ({navigation, searchFilesOnly}) => {
         <ListItem
           navigation={navigation}
           singleMedia={item}
-          isSearchFile={item.title === 'Shakki'}
+          isSearchFile={item.title === searchKeyword}
         />
       )}
     />
@@ -27,6 +27,7 @@ const Searchlist = ({navigation, searchFilesOnly}) => {
 Searchlist.propTypes = {
   navigation: PropTypes.object,
   searchFilesOnly: PropTypes.bool,
+  searchKeyword: PropTypes.string,
 };
 
 export default Searchlist;

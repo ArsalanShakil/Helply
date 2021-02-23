@@ -1,27 +1,41 @@
 import React from 'react';
-import {SafeAreaView, StatusBar} from 'react-native';
+import {SafeAreaView, StatusBar, TextInput} from 'react-native';
 import {Input, Button} from 'react-native-elements';
 import Searchlist from '../components/Searchlist';
 import GlobalStyles from '../utils/GlobalStyles';
+import useSearchForm from '../hooks/SearchHooks';
 import PropTypes from 'prop-types';
-
-// const {handleInputChange, inputs, uploadErrors, reset} = useSearchForm();
+import {MainContext} from '../contexts/MainContext';
+import {useState, useContext, useEffect} from 'react';
 
 const Search = ({navigation}) => {
+  const {update, setUpdate} = useContext(MainContext);
+
+  const [value, onChangeText] = useState('');
+
+  const doUpdate = async () => {
+    try {
+      setUpdate(update + 1);
+    } catch (error) {
+      Alert.alert('Update', 'Failed');
+      console.error(error);
+    }
+  };
+
   return (
     <SafeAreaView style={GlobalStyles.droidSafeArea}>
-      <Input
+      <TextInput
+        style={{height: 80, borderColor: 'gray', borderWidth: 1}}
         placeholder="search"
-        // value={inputs.title}
-        // onChangeText={(txt) => handleInputChange('title', txt)}
-        // errorMessage={uploadErrors.title}
+        onChangeText={(text) => onChangeText(text)}
+        value={value}
       />
-      <Button title="Search" />
+      <Button title="Search" onPress={doUpdate} />
+
       <Searchlist
         navigation={navigation}
-        // searchKeyword={'Test'}
+        searchKeyword={value}
         searchFilesOnly={true}
-        // myFilesOnly={true}
       />
 
       <StatusBar style="auto" />
@@ -32,6 +46,7 @@ const Search = ({navigation}) => {
 Search.propTypes = {
   navigation: PropTypes.object,
   searchFilesOnly: PropTypes.bool,
+  searchKeyword: PropTypes.string,
 };
 
 export default Search;
