@@ -89,7 +89,7 @@ const Login = ({navigation}) => {
 const styles = StyleSheet.create({
   sv: {
     flexGrow: 1,
-    backgroundColor: '#FEFEF2',
+    backgroundColor: '#f5e4d5',
   },
   container: {
     flex: 1,

@@ -16,6 +16,7 @@ import {Icon} from 'react-native-elements';
 import Upload from '../views/Upload';
 import MyFiles from '../views/MyFiles';
 import Modify from '../views/Modify';
+import OnboardingScreen from '../views/OnboardingScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -67,6 +68,13 @@ const StackScreen = () => {
         </>
       ) : (
         <>
+          <Stack.Screen
+            name="OnBoardingScreen"
+            component={OnboardingScreen}
+            options={() => ({
+              headerShown: false,
+            })}
+          />
           <Stack.Screen
             name="Login"
             component={Login}
