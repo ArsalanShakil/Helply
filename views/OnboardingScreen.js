@@ -4,6 +4,7 @@ import {Button} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import Onboarding from 'react-native-onboarding-swiper';
+import LottieView from 'lottie-react-native';
 
 const Next = ({...props}) => (
   <Button
@@ -86,7 +87,7 @@ const OnboardingScreen = ({navigation}) => {
       DoneButtonComponent={Done}
       DotComponent={Dots}
       titleStyles={{color: '#0E2A25', paddingBottom: 24}}
-      imageContainerStyles={{paddingBottom: 24}}
+      imageContainerStyles={{paddingBottom: 0}}
       subTitleStyles={{color: '#0E2A25'}}
       pages={[
         {
@@ -124,9 +125,16 @@ const OnboardingScreen = ({navigation}) => {
         {
           backgroundColor: '#f3fff2',
           image: (
-            <Image
-              source={require('../assets/onBoardingScreen-3.png')}
-              style={{width: 320, height: 200}}
+            <LottieView
+              source={require('../assets/data.json')}
+              autoPlay
+              loop
+              style={{
+                width: 400,
+                height: 400,
+                marginBottom: -50,
+                marginTop: -50,
+              }}
             />
           ),
           title: 'Monitoring',
@@ -143,3 +151,7 @@ const OnboardingScreen = ({navigation}) => {
 };
 
 export default OnboardingScreen;
+/* <Image
+              source={require('../assets/onBoardingScreen-3.png')}
+              style={{width: 320, height: 200}}
+            /> */
