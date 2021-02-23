@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import {FlatList} from 'react-native';
 import {useLoadMedia} from '../hooks/SearchHooks';
-import ListItem from './ListItem';
+import SearchListItem from './SearchListItem';
 import PropTypes from 'prop-types';
 import {MainContext} from '../contexts/MainContext';
 
@@ -14,10 +14,13 @@ const Searchlist = ({navigation, searchFilesOnly, searchKeyword}) => {
       data={mediaArray.reverse()}
       keyExtractor={(item, index) => index.toString()}
       renderItem={({item}) => (
-        <ListItem
+        <SearchListItem
           navigation={navigation}
           singleMedia={item}
-          isSearchFile={item.title === searchKeyword}
+          isSearchFile={
+            item.title.toLowerCase().includes(searchKeyword) ||
+            item.description.toLowerCase().includes(searchKeyword)
+          }
         />
       )}
     />

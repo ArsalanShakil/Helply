@@ -74,7 +74,7 @@ const SearchListItem = ({navigation, singleMedia, isSearchFile}) => {
   );
 };
 
-ListItem.propTypes = {
+SearchListItem.propTypes = {
   singleMedia: PropTypes.object,
   navigation: PropTypes.object,
   isSearchFile: PropTypes.bool,

@@ -3,8 +3,6 @@ import {useContext, useEffect, useState} from 'react';
 import {MainContext} from '../contexts/MainContext';
 import {appIdentifier, baseUrl} from '../utils/variables';
 
-import {validator} from '../utils/validator';
-
 // general function for fetching (options default value is empty object)
 const doFetch = async (url, options = {}) => {
   const response = await fetch(url, options);
@@ -38,7 +36,11 @@ const useLoadMedia = (searchFilesOnly, searchKeyword, userId) => {
       console.log('status searchKeyword:', searchKeyword);
 
       if (searchFilesOnly) {
-        media = media.filter((item) => item.title === searchKeyword);
+        media = media.filter(
+          (item) =>
+            item.title.toLowerCase().includes(searchKeyword) ||
+            item.description.toLowerCase().includes(searchKeyword)
+        );
       }
 
       setMediaArray(media);
