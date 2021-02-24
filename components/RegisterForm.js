@@ -126,6 +126,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginHorizontal: '20%',
     marginBottom: 20,
+    paddingLeft: 32,
   },
 });
 RegisterForm.propTypes = {

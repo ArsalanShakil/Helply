@@ -2,7 +2,6 @@ import React from 'react';
 import {Image, View} from 'react-native';
 import {Button} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Ionicons';
-
 import Onboarding from 'react-native-onboarding-swiper';
 import LottieView from 'lottie-react-native';
 
@@ -79,14 +78,14 @@ const OnboardingScreen = ({navigation}) => {
   return (
     <Onboarding
       onSkip={() => navigation.replace('Login')}
-      onDone={() => navigation.navigate('Login')}
+      onDone={() => navigation.replace('Login')}
       bottomBarHighlight={false}
       bottomBarHeight={90}
       NextButtonComponent={Next}
       SkipButtonComponent={Skip}
       DoneButtonComponent={Done}
       DotComponent={Dots}
-      titleStyles={{color: '#0E2A25', paddingBottom: 24}}
+      titleStyles={{color: '#0E2A25', paddingBottom: 24, paddingTop: 24}}
       imageContainerStyles={{paddingBottom: 0}}
       subTitleStyles={{color: '#0E2A25'}}
       pages={[
@@ -95,7 +94,7 @@ const OnboardingScreen = ({navigation}) => {
           image: (
             <Image
               source={require('../assets/onBoardingScreen-1.png')}
-              style={{width: 290, height: 250, marginTop: -50}}
+              style={{width: 290, height: 250, marginTop: -120}}
             />
           ),
           title: 'Welcome',
@@ -126,13 +125,13 @@ const OnboardingScreen = ({navigation}) => {
           backgroundColor: '#f3fff2',
           image: (
             <LottieView
-              source={require('../assets/data.json')}
+              source={require('../assets/animation.json')}
               autoPlay
               loop
               style={{
                 width: 400,
                 height: 400,
-                marginBottom: -50,
+                marginBottom: -120,
                 marginTop: -50,
               }}
             />

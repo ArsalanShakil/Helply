@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
-import React, {useContext} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createStackNavigator} from '@react-navigation/stack';
 import {
@@ -17,6 +17,7 @@ import Upload from '../views/Upload';
 import MyFiles from '../views/MyFiles';
 import Modify from '../views/Modify';
 import OnboardingScreen from '../views/OnboardingScreen';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -50,9 +51,55 @@ const TabScreen = () => {
 };
 
 const StackScreen = () => {
+  const [isFirstLaunch, setIsFirstLaunch] = useState(null);
+
+  useEffect(() => {
+    AsyncStorage.getItem('alreadyLaunched').then((value) => {
+      if (value === null) {
+        AsyncStorage.setItem('alreadyLaunched', 'true');
+        setIsFirstLaunch(true);
+      } else {
+        setIsFirstLaunch(false);
+      }
+    });
+  }, []);
+
+  /*   const [isFirstLaunch, setIsFirstLaunch] = useState(null);
+  useEffect(() => {
+    AsyncStorage.getItem('alreadyLaunched').then((value) => {
+      if (value === null) {
+        AsyncStorage.setItem('alreadyLaunched', 'true');
+      } else {
+        setIsFirstLaunch(false);
+      }
+    });
+  }, []);
+ */
   const {isLoggedIn} = useContext(MainContext);
   return (
     <Stack.Navigator>
+      {isFirstLaunch ? (
+        <>
+          <Stack.Screen
+            name="onBoardingScreen"
+            component={OnboardingScreen}
+            options={() => ({
+              headerShown: false,
+            })}
+          />
+        </>
+      ) : (
+        <>
+          <Stack.Screen
+            name="Login2"
+            component={Login}
+            options={() => ({
+              headerShown: false,
+            })}
+          />
+        </>
+      )}
+
       {isLoggedIn ? (
         <>
           <Stack.Screen
@@ -68,13 +115,6 @@ const StackScreen = () => {
         </>
       ) : (
         <>
-          <Stack.Screen
-            name="OnBoardingScreen"
-            component={OnboardingScreen}
-            options={() => ({
-              headerShown: false,
-            })}
-          />
           <Stack.Screen
             name="Login"
             component={Login}
