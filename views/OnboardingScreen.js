@@ -4,6 +4,7 @@ import {Button} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Onboarding from 'react-native-onboarding-swiper';
 import LottieView from 'lottie-react-native';
+import Login from '../views/Login';
 
 const Next = ({...props}) => (
   <Button
@@ -77,8 +78,8 @@ const Done = ({...props}) => (
 const OnboardingScreen = ({navigation}) => {
   return (
     <Onboarding
-      onSkip={() => navigation.replace('Login')}
-      onDone={() => navigation.replace('Login')}
+      onSkip={() => navigation.navigate('Login')}
+      onDone={() => navigation.navigate('Login')}
       bottomBarHighlight={false}
       bottomBarHeight={90}
       NextButtonComponent={Next}

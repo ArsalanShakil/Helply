@@ -51,9 +51,12 @@ const TabScreen = () => {
 };
 
 const StackScreen = () => {
-  const [isFirstLaunch, setIsFirstLaunch] = useState(null);
+  // The code for ONBOARDINGSCREEN
+  // id details not rendering on first launch
 
-  useEffect(() => {
+  // const [isFirstLaunch, setIsFirstLaunch] = useState(null);
+
+  /* useEffect(() => {
     AsyncStorage.getItem('alreadyLaunched').then((value) => {
       if (value === null) {
         AsyncStorage.setItem('alreadyLaunched', 'true');
@@ -62,44 +65,15 @@ const StackScreen = () => {
         setIsFirstLaunch(false);
       }
     });
-  }, []);
+  }, []); */
 
-  /*   const [isFirstLaunch, setIsFirstLaunch] = useState(null);
-  useEffect(() => {
-    AsyncStorage.getItem('alreadyLaunched').then((value) => {
-      if (value === null) {
-        AsyncStorage.setItem('alreadyLaunched', 'true');
-      } else {
-        setIsFirstLaunch(false);
-      }
-    });
-  }, []);
+  /*   if (isFirstLaunch === null) {
+    return null;
+  } else if (isFirstLaunch === true) {
  */
   const {isLoggedIn} = useContext(MainContext);
   return (
     <Stack.Navigator>
-      {isFirstLaunch ? (
-        <>
-          <Stack.Screen
-            name="onBoardingScreen"
-            component={OnboardingScreen}
-            options={() => ({
-              headerShown: false,
-            })}
-          />
-        </>
-      ) : (
-        <>
-          <Stack.Screen
-            name="Login2"
-            component={Login}
-            options={() => ({
-              headerShown: false,
-            })}
-          />
-        </>
-      )}
-
       {isLoggedIn ? (
         <>
           <Stack.Screen
@@ -116,6 +90,13 @@ const StackScreen = () => {
       ) : (
         <>
           <Stack.Screen
+            name="OnBoarding"
+            component={OnboardingScreen}
+            options={() => ({
+              headerShown: false,
+            })}
+          />
+          <Stack.Screen
             name="Login"
             component={Login}
             options={() => ({
@@ -126,8 +107,10 @@ const StackScreen = () => {
       )}
     </Stack.Navigator>
   );
+  /* } else {
+    return <Login />;
+  } */
 };
-
 const Navigator = () => {
   return (
     <NavigationContainer>
