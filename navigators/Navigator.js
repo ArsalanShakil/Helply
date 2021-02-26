@@ -22,6 +22,7 @@ import Modify from '../views/Modify';
 import OnboardingScreen from '../views/OnboardingScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {DrawerActions} from '@react-navigation/native';
+import Search from '../views/Search';
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
@@ -55,6 +56,9 @@ const DrawerScreen = () => {
               color = '#0E2A25';
 
               break;
+            case 'Search':
+              iconName = focused ? 'search' : 'search';
+              break;
           }
           return <Icon name={iconName} size={size} color={color} />;
         },
@@ -63,6 +67,7 @@ const DrawerScreen = () => {
       <Drawer.Screen name="Home" component={Home} />
       <Drawer.Screen name="Profile" component={Profile} />
       <Drawer.Screen name="Upload" component={Upload} />
+      <Drawer.Screen name="Search" component={Search} />
     </Drawer.Navigator>
   );
 };

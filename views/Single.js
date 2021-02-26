@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, ActivityIndicator} from 'react-native';
+import {StyleSheet, ActivityIndicator, ImageBackground} from 'react-native';
 import PropTypes from 'prop-types';
 import {uploadsUrl} from '../utils/variables';
 import {Avatar, Card, ListItem, Text} from 'react-native-elements';
 import moment from 'moment';
 import {useTag, useUser} from '../hooks/ApiHooks';
-import {Video} from 'expo-av';
+import {Video, Audio} from 'expo-av';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as ScreenOrientation from 'expo-screen-orientation';
 import {ScrollView} from 'react-native-gesture-handler';
@@ -93,25 +93,43 @@ const Single = ({route}) => {
         <Card.Title h4>{file.title}</Card.Title>
         <Card.Title>{moment(file.time_added).format('LLL')}</Card.Title>
         <Card.Divider />
-        {file.media_type === 'image' ? (
-          <Card.Image
-            source={{uri: uploadsUrl + file.filename}}
-            style={styles.image}
-            PlaceholderContent={<ActivityIndicator />}
-          />
-        ) : (
-          <Video
-            ref={handleVideoRef}
-            source={{uri: uploadsUrl + file.filename}}
-            style={styles.image}
-            useNativeControls={true}
-            resizeMode="cover"
-            onError={(err) => {
-              console.error('video', err);
-            }}
-            posterSource={{uri: uploadsUrl + file.screenshot}}
-          />
-        )}
+        {(() => {
+          if (file.media_type === 'image') {
+            return (
+              <Card.Image
+                source={{uri: uploadsUrl + file.filename}}
+                style={styles.image}
+                PlaceholderContent={<ActivityIndicator />}
+              />
+            );
+          } else if (file.media_type === 'video') {
+            return (
+              <Video
+                ref={handleVideoRef}
+                source={{uri: uploadsUrl + file.filename}}
+                style={styles.image}
+                useNativeControls={true}
+                resizeMode="cover"
+                onError={(err) => {
+                  console.error('video', err);
+                }}
+                posterSource={{uri: uploadsUrl + file.screenshot}}
+              />
+            );
+          } else if (file.media_type === 'audio') {
+            return (
+              <Video
+                source={{uri: uploadsUrl + file.filename}}
+                style={styles.image}
+                useNativeControls={true}
+                onError={(err) => {
+                  console.error('audio', err);
+                }}
+                posterSource={{uri: uploadsUrl + file.screenshot}}
+              />
+            );
+          }
+        })()}
         <Card.Divider />
         <Text style={styles.description}>{file.description}</Text>
         <ListItem>

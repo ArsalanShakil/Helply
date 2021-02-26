@@ -1,16 +1,14 @@
 import React, {useContext} from 'react';
 import PropTypes from 'prop-types';
 import {uploadsUrl} from '../utils/variables';
-import {ListItem as RNEListItem} from 'react-native-elements';
+import {Avatar, ListItem as RNEListItem} from 'react-native-elements';
 import {Button} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useMedia} from '../hooks/ApiHooks';
+import {useMedia} from '../hooks/SearchHooks';
 import {MainContext} from '../contexts/MainContext';
 import {Alert} from 'react-native';
-import {Image} from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
 
-const ListItem = ({navigation, singleMedia, isMyFile}) => {
+const SearchListItem = ({navigation, singleMedia, isSearchFile}) => {
   // console.log(props);
   const {deleteFile} = useMedia();
   const {setUpdate, update} = useContext(MainContext);
@@ -41,12 +39,14 @@ const ListItem = ({navigation, singleMedia, isMyFile}) => {
   // console.log(singleMedia);
   return (
     <RNEListItem
+      bottomDivider
       onPress={() => {
         navigation.navigate('Single', {file: singleMedia});
       }}
-      containerStyle={{backgroundColor: '#FEFEF2', flexDirection: 'column'}}
     >
-      <Image
+      <Avatar
+        size="large"
+        square
         source={
           singleMedia.thumbnails
             ? {
@@ -54,13 +54,12 @@ const ListItem = ({navigation, singleMedia, isMyFile}) => {
               }
             : require('../assets/play.jpg')
         }
-        style={{width: 360, height: 300}}
-      ></Image>
-      <RNEListItem.Content style={{alignItems: 'center'}}>
+      ></Avatar>
+
+      <RNEListItem.Content>
         <RNEListItem.Title h4>{singleMedia.title}</RNEListItem.Title>
-        {/* <RNEListItem.Title h4>{singleMedia.title}</RNEListItem.Title> */}
         <RNEListItem.Subtitle>{singleMedia.description}</RNEListItem.Subtitle>
-        {isMyFile && (
+        {isSearchFile && (
           <>
             <Button
               title="Modify"
@@ -70,15 +69,15 @@ const ListItem = ({navigation, singleMedia, isMyFile}) => {
           </>
         )}
       </RNEListItem.Content>
-      <Icon name="chevron-down-outline" size={30} color="#0E2A25" />
+      <RNEListItem.Chevron />
     </RNEListItem>
   );
 };
 
-ListItem.propTypes = {
+SearchListItem.propTypes = {
   singleMedia: PropTypes.object,
   navigation: PropTypes.object,
-  isMyFile: PropTypes.bool,
+  isSearchFile: PropTypes.bool,
 };
 
-export default ListItem;
+export default SearchListItem;
