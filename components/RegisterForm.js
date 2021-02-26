@@ -7,6 +7,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useContext} from 'react';
 import {MainContext} from '../contexts/MainContext';
 import {Input, Button} from 'react-native-elements';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const RegisterForm = ({navigation}) => {
   const {setIsLoggedIn, setUser} = useContext(MainContext);
@@ -103,6 +104,8 @@ const RegisterForm = ({navigation}) => {
         title="Register!"
         onPress={doRegister}
         buttonStyle={styles.button}
+        icon={<Icon name="checkmark-circle" size={25} color="#0E2A25" />}
+        iconRight
       />
     </View>
   );
@@ -123,6 +126,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginHorizontal: '20%',
     marginBottom: 20,
+    paddingLeft: 32,
   },
 });
 RegisterForm.propTypes = {

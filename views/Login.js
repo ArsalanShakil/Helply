@@ -89,7 +89,7 @@ const Login = ({navigation}) => {
 const styles = StyleSheet.create({
   sv: {
     flexGrow: 1,
-    backgroundColor: '#FEFEF2',
+    backgroundColor: '#f5e4d5',
   },
   container: {
     flex: 1,
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FEFEF2',
     borderColor: '#FEFEF2',
     borderRadius: 10,
-    marginTop: 30,
+    marginTop: 8,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,

@@ -1,7 +1,11 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
-import React, {useContext} from 'react';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import React, {useContext, useState, useEffect} from 'react';
+import {createDrawerNavigator} from '@react-navigation/drawer';
+import Icon from 'react-native-vector-icons/Ionicons';
+import {Button} from 'react-native-elements';
+import {TouchableOpacity} from 'react-native';
+
 import {createStackNavigator} from '@react-navigation/stack';
 import {
   getFocusedRouteNameFromRoute,
@@ -12,30 +16,45 @@ import Profile from '../views/Profile';
 import Single from '../views/Single';
 import Login from '../views/Login';
 import {MainContext} from '../contexts/MainContext';
-import {Icon} from 'react-native-elements';
 import Upload from '../views/Upload';
 import MyFiles from '../views/MyFiles';
 import Modify from '../views/Modify';
+import OnboardingScreen from '../views/OnboardingScreen';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {DrawerActions} from '@react-navigation/native';
 import Search from '../views/Search';
 
-const Tab = createBottomTabNavigator();
+const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
 
-const TabScreen = () => {
+const DrawerScreen = () => {
   return (
-    <Tab.Navigator
+    <Drawer.Navigator
+      initialRouteName="Home"
+      drawerStyle={{
+        backgroundColor: '#FEFEF2',
+      }}
+      drawerContentOptions={{
+        activeTintColor: '#0E2A25',
+        activeBackgroundColor: '#D4CCC4',
+        inactiveTintColor: '#0E2A25',
+      }}
       screenOptions={({route}) => ({
-        tabBarIcon: ({focused, color, size}) => {
+        drawerIcon: ({focused, color, size}) => {
           let iconName;
           switch (route.name) {
             case 'Home':
-              iconName = 'home';
+              iconName = 'home-outline';
+              color = '#0E2A25';
               break;
             case 'Profile':
-              iconName = 'account-box';
+              iconName = 'person-circle-outline';
+              color = '#0E2A25';
               break;
             case 'Upload':
-              iconName = 'cloud-upload';
+              iconName = 'add-circle-outline';
+              color = '#0E2A25';
+
               break;
             case 'Search':
               iconName = focused ? 'search' : 'search';
@@ -45,15 +64,36 @@ const TabScreen = () => {
         },
       })}
     >
-      <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Profile" component={Profile} />
-      <Tab.Screen name="Upload" component={Upload} />
-      <Tab.Screen name="Search" component={Search} />
-    </Tab.Navigator>
+      <Drawer.Screen name="Home" component={Home} />
+      <Drawer.Screen name="Profile" component={Profile} />
+      <Drawer.Screen name="Upload" component={Upload} />
+      <Drawer.Screen name="Search" component={Search} />
+    </Drawer.Navigator>
   );
 };
 
 const StackScreen = () => {
+  // The code for ONBOARDINGSCREEN
+  // id details not rendering on first launch
+
+  // const [isFirstLaunch, setIsFirstLaunch] = useState(null);
+
+  /* useEffect(() => {
+    AsyncStorage.getItem('alreadyLaunched').then((value) => {
+      if (value === null) {
+        AsyncStorage.setItem('alreadyLaunched', 'true');
+        setIsFirstLaunch(true);
+      } else {
+        setIsFirstLaunch(false);
+      }
+    });
+  }, []); */
+
+  /*   if (isFirstLaunch === null) {
+    return null;
+  } else if (isFirstLaunch === true) {
+ */
+
   const {isLoggedIn} = useContext(MainContext);
   return (
     <Stack.Navigator>
@@ -61,9 +101,47 @@ const StackScreen = () => {
         <>
           <Stack.Screen
             name="Home"
-            component={TabScreen}
-            options={({route}) => ({
-              headerTitle: getFocusedRouteNameFromRoute(route),
+            component={DrawerScreen}
+            options={({navigation}) => ({
+              headerTitle: '',
+              headerStyle: {
+                backgroundColor: '#FEFEF2',
+              },
+              headerTintColor: '#FEFEF2',
+              headerTitleStyle: {
+                fontWeight: 'normal',
+              },
+
+              headerRight: () => (
+                <Button
+                  onPress={() =>
+                    alert('This functionality is not availble yet!')
+                  }
+                  title=""
+                  icon={<Icon name="call-outline" size={30} color="#0E2A25" />}
+                  iconRight
+                  type="clear"
+                />
+              ),
+              headerLeft: () => (
+                <Button
+                  // Need some work
+                  onPress={() =>
+                    navigation.dispatch(DrawerActions.toggleDrawer())
+                  }
+                  title=""
+                  icon={
+                    <Icon
+                      name="menu-outline"
+                      size={34}
+                      color="#0E2A25"
+                      fontWeight="bold"
+                    />
+                  }
+                  iconRight
+                  type="clear"
+                />
+              ),
             })}
           />
           <Stack.Screen name="Modify" component={Modify} />
@@ -72,6 +150,13 @@ const StackScreen = () => {
         </>
       ) : (
         <>
+          <Stack.Screen
+            name="OnBoarding"
+            component={OnboardingScreen}
+            options={() => ({
+              headerShown: false,
+            })}
+          />
           <Stack.Screen
             name="Login"
             component={Login}
@@ -83,8 +168,10 @@ const StackScreen = () => {
       )}
     </Stack.Navigator>
   );
+  /* } else {
+    return <Login />;
+  } */
 };
-
 const Navigator = () => {
   return (
     <NavigationContainer>
