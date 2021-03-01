@@ -12,13 +12,14 @@ const LoginForm = ({navigation}) => {
   const [loading, setLoading] = useState(false);
   const {inputs, handleInputChange} = useLoginForm();
   const {postLogin} = useLogin();
-  const {setIsLoggedIn} = useContext(MainContext);
+  const {setIsLoggedIn, setUser} = useContext(MainContext);
 
   const doLogin = async () => {
     setLoading(true);
     try {
       const userData = await postLogin(inputs);
       setIsLoggedIn(true);
+      setUser(userData.user);
       await AsyncStorage.setItem('userToken', userData.token);
       setLoading(false);
     } catch (error) {
