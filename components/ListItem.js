@@ -1,14 +1,15 @@
 import React, {useContext} from 'react';
 import PropTypes from 'prop-types';
 import {uploadsUrl} from '../utils/variables';
-import {ListItem as RNEListItem} from 'react-native-elements';
-import {Button} from 'react-native';
+import {Avatar, ListItem as RNEListItem} from 'react-native-elements';
+import {Button} from 'react-native-elements';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useMedia} from '../hooks/ApiHooks';
 import {MainContext} from '../contexts/MainContext';
 import {Alert} from 'react-native';
 import {Image} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {View} from 'react-native';
 
 const ListItem = ({navigation, singleMedia, isMyFile}) => {
   // console.log(props);
@@ -41,10 +42,15 @@ const ListItem = ({navigation, singleMedia, isMyFile}) => {
   // console.log(singleMedia);
   return (
     <RNEListItem
+      bottomDivider
       onPress={() => {
         navigation.navigate('Single', {file: singleMedia});
       }}
-      containerStyle={{backgroundColor: '#FEFEF2', flexDirection: 'column'}}
+      containerStyle={{
+        backgroundColor: '#FEFEF2',
+        flexDirection: 'column',
+        marginTop: 32,
+      }}
     >
       <Image
         source={
@@ -57,20 +63,51 @@ const ListItem = ({navigation, singleMedia, isMyFile}) => {
         style={{width: 360, height: 300}}
       ></Image>
       <RNEListItem.Content style={{alignItems: 'center'}}>
-        <RNEListItem.Title h4>{singleMedia.title}</RNEListItem.Title>
-        {/* <RNEListItem.Title h4>{singleMedia.title}</RNEListItem.Title> */}
-        <RNEListItem.Subtitle>{singleMedia.description}</RNEListItem.Subtitle>
+        <RNEListItem.Title
+          text
+          style={{padding: 16, fontSize: 20, fontWeight: '400'}}
+        >
+          {singleMedia.title}
+        </RNEListItem.Title>
+        <RNEListItem.Subtitle style={{paddingBottom: 32, fontSize: 16}}>
+          {singleMedia.description}
+        </RNEListItem.Subtitle>
         {isMyFile && (
           <>
-            <Button
-              title="Modify"
-              onPress={() => navigation.push('Modify', {file: singleMedia})}
-            ></Button>
-            <Button title="Delete" color="red" onPress={doDelete}></Button>
+            <View style={{flexDirection: 'row', left: 110, paddingBottom: 24}}>
+              <Button
+                title=""
+                icon={
+                  <Icon
+                    name="create-outline"
+                    size={34}
+                    color="#0E2A25"
+                    fontWeight="bold"
+                  />
+                }
+                iconRight
+                type="clear"
+                onPress={() => navigation.push('Modify', {file: singleMedia})}
+              ></Button>
+              <Button
+                title=""
+                icon={
+                  <Icon
+                    name="trash-outline"
+                    size={34}
+                    color="#0E2A25"
+                    fontWeight="bold"
+                  />
+                }
+                iconRight
+                type="clear"
+                onPress={doDelete}
+              ></Button>
+            </View>
           </>
         )}
       </RNEListItem.Content>
-      <Icon name="chevron-down-outline" size={30} color="#0E2A25" />
+      <Icon name="chevron-down-outline" size={20} color="#7a7a7a" />
     </RNEListItem>
   );
 };
@@ -79,6 +116,7 @@ ListItem.propTypes = {
   singleMedia: PropTypes.object,
   navigation: PropTypes.object,
   isMyFile: PropTypes.bool,
+  route: PropTypes.object,
 };
 
 export default ListItem;

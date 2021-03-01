@@ -77,9 +77,7 @@ const Done = ({...props}) => (
 );
 
 const OnboardingScreen = ({navigation}) => {
-
-
-   useEffect(() => {
+  useEffect(() => {
     AsyncStorage.getItem('alreadyLaunched').then((value) => {
       if (value === null) {
         AsyncStorage.setItem('alreadyLaunched', 'true');
@@ -89,7 +87,6 @@ const OnboardingScreen = ({navigation}) => {
       }
     });
   }, []);
-
 
   return (
     <Onboarding

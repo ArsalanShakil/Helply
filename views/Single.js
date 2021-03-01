@@ -9,6 +9,7 @@ import {Video, Audio} from 'expo-av';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as ScreenOrientation from 'expo-screen-orientation';
 import {ScrollView} from 'react-native-gesture-handler';
+import {View} from 'react-native';
 
 const Single = ({route}) => {
   const {file} = route.params;
@@ -88,8 +89,8 @@ const Single = ({route}) => {
   }, [videoRef]);
 
   return (
-    <ScrollView>
-      <Card>
+    <ScrollView style={{backgroundColor: '#f5e4d5'}}>
+      <Card containerStyle={styles.card}>
         <Card.Title h4>{file.title}</Card.Title>
         <Card.Title>{moment(file.time_added).format('LLL')}</Card.Title>
         <Card.Divider />
@@ -131,10 +132,10 @@ const Single = ({route}) => {
           }
         })()}
         <Card.Divider />
-        <Text style={styles.description}>{file.description}</Text>
-        <ListItem>
-          <Avatar source={{uri: avatar}} />
-          <Text>{owner.username}</Text>
+        <ListItem containerStyle={{backgroundColor: '#FEFEF2'}}>
+          <Avatar source={{uri: avatar}} rounded />
+          <Text style={{fontWeight: 'bold'}}>{owner.username}</Text>
+          <Text style={{width: 170}}>{file.description}</Text>
         </ListItem>
       </Card>
     </ScrollView>
@@ -149,6 +150,12 @@ const styles = StyleSheet.create({
   },
   description: {
     marginBottom: 10,
+  },
+  card: {
+    backgroundColor: '#FEFEF2',
+    borderColor: '#FEFEF2',
+    borderRadius: 10,
+    marginTop: 8,
   },
 });
 
