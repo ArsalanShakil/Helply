@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Image, View} from 'react-native';
 import {Button} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Onboarding from 'react-native-onboarding-swiper';
 import LottieView from 'lottie-react-native';
 import Login from '../views/Login';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Next = ({...props}) => (
   <Button
@@ -76,6 +77,20 @@ const Done = ({...props}) => (
 );
 
 const OnboardingScreen = ({navigation}) => {
+
+
+   useEffect(() => {
+    AsyncStorage.getItem('alreadyLaunched').then((value) => {
+      if (value === null) {
+        AsyncStorage.setItem('alreadyLaunched', 'true');
+      } else {
+        //navigate to Login
+        navigation.navigate('Login');
+      }
+    });
+  }, []);
+
+
   return (
     <Onboarding
       onSkip={() => navigation.navigate('Login')}

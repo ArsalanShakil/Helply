@@ -36,6 +36,26 @@ const Login = ({navigation}) => {
       }
     }
   };
+  /* const [isFirstLaunch, setIsFirstLaunch] = useState(null);
+
+   useEffect(() => {
+    AsyncStorage.getItem('alreadyLaunched').then((value) => {
+      if (value === null) {
+        AsyncStorage.setItem('alreadyLaunched', 'true');
+        setIsFirstLaunch(true);
+      } else {
+        setIsFirstLaunch(false);
+      }
+    });
+  }, []);
+
+    if (isFirstLaunch === null) {
+    return null;
+  } else if (isFirstLaunch === true) {
+    } else {
+    return <Login />;
+  }
+}; */
   useEffect(() => {
     getToken();
   }, []);
