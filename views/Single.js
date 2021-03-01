@@ -131,7 +131,7 @@ const Single = ({route}) => {
       lock();
     };
   }, [videoRef]);
-  console.log(comment);
+  //console.log('comments fetched from database> ', comment);
   return (
     <ScrollView>
       <Card>
@@ -183,16 +183,16 @@ const Single = ({route}) => {
         </ListItem>
         {comment.length > 0 ? (
           <>
-            {comment.map((item, index) => (
-              <Text>{item.comment}</Text>
+            {comment.map((item) => (
+              <Text key={item.comment_id}>{item.comment}</Text>
             ))}
           </>
         ) : (
           <>
-            <Text>Hello</Text>
+            <Text>Noone has commented yet...</Text>
           </>
         )}
-        <Text>Hello2</Text>
+
         <TextInput
           style={{height: 80, borderColor: 'gray', borderWidth: 1}}
           placeholder="comment"
