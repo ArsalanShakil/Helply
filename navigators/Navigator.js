@@ -73,27 +73,6 @@ const DrawerScreen = () => {
 };
 
 const StackScreen = () => {
-  // The code for ONBOARDINGSCREEN
-  // id details not rendering on first launch
-
-  // const [isFirstLaunch, setIsFirstLaunch] = useState(null);
-
-  /* useEffect(() => {
-    AsyncStorage.getItem('alreadyLaunched').then((value) => {
-      if (value === null) {
-        AsyncStorage.setItem('alreadyLaunched', 'true');
-        setIsFirstLaunch(true);
-      } else {
-        setIsFirstLaunch(false);
-      }
-    });
-  }, []); */
-
-  /*   if (isFirstLaunch === null) {
-    return null;
-  } else if (isFirstLaunch === true) {
- */
-
   const {isLoggedIn} = useContext(MainContext);
   return (
     <Stack.Navigator>
@@ -168,9 +147,6 @@ const StackScreen = () => {
       )}
     </Stack.Navigator>
   );
-  /* } else {
-    return <Login />;
-  } */
 };
 const Navigator = () => {
   return (

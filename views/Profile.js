@@ -14,7 +14,7 @@ const Profile = ({navigation}) => {
   const {getFilesByTag} = useTag();
   const logout = async () => {
     setIsLoggedIn(false);
-    await AsyncStorage.clear();
+    await AsyncStorage.removeItem('userToken');
     if (!isLoggedIn) {
       // this is to make sure isLoggedIn has changed, will be removed later
       navigation.navigate('Login');
