@@ -10,8 +10,7 @@ import {Video} from 'expo-av';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as ScreenOrientation from 'expo-screen-orientation';
 import {ScrollView} from 'react-native-gesture-handler';
-import {doFetch} from '../hooks/ApiHooks';
-import {appIdentifier, baseUrl} from '../utils/variables';
+import {MainContext} from '../contexts/MainContext';
 
 const Single = ({route}) => {
   const {file} = route.params;
@@ -21,6 +20,7 @@ const Single = ({route}) => {
   const {getFilesByTag} = useTag();
   const {getUser} = useUser();
   const {getComment} = useComment();
+  const {postComment} = useComment();
   const [videoRef, setVideoRef] = useState(null);
   const [value, onChangeText] = useState('');
 
@@ -36,7 +36,7 @@ const Single = ({route}) => {
     }
   };
 
-  const postComment = async () => {
+  const sendComment = async () => {
     const userToken = await AsyncStorage.getItem('userToken');
     const options = {
       method: 'POST',
@@ -52,14 +52,7 @@ const Single = ({route}) => {
         userToken
       ),
     };
-    try {
-      // console.log('options', options);
-      const result = await doFetch(baseUrl + 'comments', options);
-
-      return result;
-    } catch (error) {
-      throw new Error('postComment error: ' + error.message);
-    }
+    postComment(options);
   };
 
   const fetchAvatar = async () => {
@@ -131,7 +124,7 @@ const Single = ({route}) => {
       lock();
     };
   }, [videoRef]);
-  console.log(comment);
+  //console.log(comment);
   return (
     <ScrollView>
       <Card>
@@ -183,23 +176,22 @@ const Single = ({route}) => {
         </ListItem>
         {comment.length > 0 ? (
           <>
-            {comment.map((item, index) => (
-              <Text>{item.comment}</Text>
+            {comment.map((item) => (
+              <Text key={item.comment_id}>{item.comment}</Text>
             ))}
           </>
         ) : (
           <>
-            <Text>Hello</Text>
+            <Text>Noone has commented yet...</Text>
           </>
         )}
-        <Text>Hello2</Text>
         <TextInput
           style={{height: 80, borderColor: 'gray', borderWidth: 1}}
           placeholder="comment"
           onChangeText={(text) => onChangeText(text)}
           value={value}
         />
-        <Button title="submit comment" onPress={postComment} />
+        <Button title="submit comment" onPress={sendComment} />
       </Card>
     </ScrollView>
   );

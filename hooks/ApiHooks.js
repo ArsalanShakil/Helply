@@ -136,7 +136,17 @@ const useComment = () => {
     }
   };
 
-  return {getComment};
+  const postComment = async (options) => {
+    try {
+      const result = await doFetch(baseUrl + 'comments', options);
+
+      return result;
+    } catch (error) {
+      throw new Error('postComment error: ' + error.message);
+    }
+  };
+
+  return {getComment, postComment};
 };
 const useTag = () => {
   const getFilesByTag = async (tag) => {
