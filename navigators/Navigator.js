@@ -125,7 +125,20 @@ const StackScreen = () => {
           />
           <Stack.Screen name="Modify" component={Modify} />
           <Stack.Screen name="My Files" component={MyFiles} />
-          <Stack.Screen name="Single" component={Single} />
+          <Stack.Screen
+            name="Single"
+            component={Single}
+            options={{
+              title: 'Single',
+              headerStyle: {
+                backgroundColor: '#FEFEF2',
+              },
+              headerTintColor: '#0E2A25',
+              headerTitleStyle: {
+                fontWeight: 'bold',
+              },
+            }}
+          />
         </>
       ) : (
         <>
