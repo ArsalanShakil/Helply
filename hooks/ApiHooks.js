@@ -122,6 +122,22 @@ const useUser = () => {
   return {postRegister, checkToken, checkIsUserAvailable, getUser};
 };
 
+const useComment = () => {
+  const getComment = async (id, token) => {
+    try {
+      const options = {
+        method: 'GET',
+        headers: {'x-access-token': token},
+      };
+      const userData = await doFetch(baseUrl + 'comments/file/' + id, options);
+      return userData;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  };
+
+  return {getComment};
+};
 const useTag = () => {
   const getFilesByTag = async (tag) => {
     try {
@@ -198,4 +214,4 @@ const useMedia = () => {
   return {upload, updateFile, deleteFile};
 };
 
-export {useLoadMedia, useLogin, useUser, useTag, useMedia};
+export {useLoadMedia, useLogin, useUser, useTag, useMedia, useComment};
