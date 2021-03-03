@@ -11,6 +11,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as ScreenOrientation from 'expo-screen-orientation';
 import {ScrollView} from 'react-native-gesture-handler';
 import {MainContext} from '../contexts/MainContext';
+import {Keyboard} from 'react-native';
 
 const Single = ({route}) => {
   const {file} = route.params;
@@ -53,6 +54,9 @@ const Single = ({route}) => {
       ),
     };
     postComment(options);
+    fetchComments();
+    onChangeText('');
+    Keyboard.dismiss();
   };
 
   const fetchAvatar = async () => {
@@ -124,9 +128,8 @@ const Single = ({route}) => {
       lock();
     };
   }, [videoRef]);
-  //console.log(comment);
   return (
-    <ScrollView>
+    <ScrollView keyboardShouldPersistTaps="always">
       <Card>
         <Card.Title h4>{file.title}</Card.Title>
         <Card.Title>{moment(file.time_added).format('LLL')}</Card.Title>
