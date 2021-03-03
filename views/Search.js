@@ -14,7 +14,6 @@ const Search = ({navigation}) => {
   const doUpdate = async () => {
     try {
       setUpdate(update + 1);
-      onChangeText('');
     } catch (error) {
       Alert.alert('Update', 'Failed');
       console.error(error);
