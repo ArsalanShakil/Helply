@@ -140,11 +140,9 @@ const useComment = () => {
         commentData.map(async (item) => {
           const owner = await getUser(item.user_id, token);
           item.owner = owner;
-          console.log('1: ', item);
           return item;
         })
       );
-      console.log('3: ', newCommentData);
 
       return newCommentData;
     } catch (error) {

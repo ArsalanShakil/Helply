@@ -3,7 +3,7 @@ import {StyleSheet, ActivityIndicator, TextInput, Alert} from 'react-native';
 import {Button} from 'react-native-elements';
 import PropTypes from 'prop-types';
 import {uploadsUrl} from '../utils/variables';
-import {Avatar, Card, ListItem, Text} from 'react-native-elements';
+import {Avatar, Card, ListItem, Text, Rating} from 'react-native-elements';
 import moment from 'moment';
 import {useTag, useUser, useComment} from '../hooks/ApiHooks';
 import {Video} from 'expo-av';
@@ -26,6 +26,10 @@ const Single = ({route}) => {
   const {deleteComm} = useComment();
   const [videoRef, setVideoRef] = useState(null);
   const [value, onChangeText] = useState('');
+
+  const ratingCompleted = async (rating) => {
+    console.log('Rating is: ' + rating);
+  };
 
   // comments
 
@@ -203,6 +207,16 @@ const Single = ({route}) => {
             );
           }
         })()}
+        <Card.Divider />
+        <Rating
+          showRating
+          startingValue={0}
+          type="star"
+          ratingCount={5}
+          imageSize={60}
+          showRating
+          onFinishRating={ratingCompleted}
+        />
         <Card.Divider />
         <ListItem containerStyle={{backgroundColor: '#FEFEF2'}}>
           <Avatar source={{uri: avatar}} rounded />
