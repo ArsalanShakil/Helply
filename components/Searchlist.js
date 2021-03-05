@@ -11,7 +11,7 @@ const Searchlist = ({navigation, searchFilesOnly, searchKeyword}) => {
 
   return (
     <FlatList
-      data={mediaArray.reverse()}
+      data={mediaArray}
       keyExtractor={(item, index) => index.toString()}
       renderItem={({item}) => (
         <SearchListItem

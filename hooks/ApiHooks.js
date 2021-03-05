@@ -124,13 +124,29 @@ const useUser = () => {
 
 const useComment = () => {
   const getComment = async (id, token) => {
+    const {getUser} = useUser();
+
     try {
       const options = {
         method: 'GET',
         headers: {'x-access-token': token},
       };
-      const userData = await doFetch(baseUrl + 'comments/file/' + id, options);
-      return userData;
+
+      const commentData = await doFetch(
+        baseUrl + 'comments/file/' + id,
+        options
+      );
+      const newCommentData = await Promise.all(
+        commentData.map(async (item) => {
+          const owner = await getUser(item.user_id, token);
+          item.owner = owner;
+          console.log('1: ', item);
+          return item;
+        })
+      );
+      console.log('3: ', newCommentData);
+
+      return newCommentData;
     } catch (error) {
       throw new Error(error.message);
     }
@@ -145,8 +161,19 @@ const useComment = () => {
       throw new Error('postComment error: ' + error.message);
     }
   };
-
-  return {getComment, postComment};
+  const deleteComm = async (id, token) => {
+    const options = {
+      method: 'DELETE',
+      headers: {'x-access-token': token},
+    };
+    try {
+      const result = await doFetch(baseUrl + 'comments/' + id, options);
+      return result;
+    } catch (error) {
+      throw new Error('deleteFile error: ' + error.message);
+    }
+  };
+  return {getComment, postComment, deleteComm};
 };
 const useTag = () => {
   const getFilesByTag = async (tag) => {

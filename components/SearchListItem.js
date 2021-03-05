@@ -20,7 +20,7 @@ const SearchListItem = ({navigation, singleMedia, isSearchFile}) => {
       [
         {text: 'Cancel'},
         {
-          title: 'Ok',
+          text: 'Ok',
           onPress: async () => {
             const userToken = await AsyncStorage.getItem('userToken');
             try {
@@ -36,41 +36,46 @@ const SearchListItem = ({navigation, singleMedia, isSearchFile}) => {
     );
   };
 
-  // console.log(singleMedia);
+  console.log('isSearchFile: ', isSearchFile);
   return (
-    <RNEListItem
-      bottomDivider
-      onPress={() => {
-        navigation.navigate('Single', {file: singleMedia});
-      }}
-    >
-      <Avatar
-        size="large"
-        square
-        source={
-          singleMedia.thumbnails
-            ? {
-                uri: uploadsUrl + singleMedia.thumbnails.w160,
-              }
-            : require('../assets/play.jpg')
-        }
-      ></Avatar>
+    <>
+      {isSearchFile && (
+        <RNEListItem
+          bottomDivider
+          onPress={() => {
+            navigation.navigate('Single', {file: singleMedia});
+          }}
+        >
+          <Avatar
+            size="large"
+            square
+            source={
+              singleMedia.thumbnails
+                ? {
+                    uri: uploadsUrl + singleMedia.thumbnails.w160,
+                  }
+                : require('../assets/play.jpg')
+            }
+          ></Avatar>
 
-      <RNEListItem.Content>
-        <RNEListItem.Title h4>{singleMedia.title}</RNEListItem.Title>
-        <RNEListItem.Subtitle>{singleMedia.description}</RNEListItem.Subtitle>
-        {isSearchFile && (
-          <>
-            <Button
-              title="Modify"
-              onPress={() => navigation.push('Modify', {file: singleMedia})}
-            ></Button>
-            <Button title="Delete" color="red" onPress={doDelete}></Button>
-          </>
-        )}
-      </RNEListItem.Content>
-      <RNEListItem.Chevron />
-    </RNEListItem>
+          <RNEListItem.Content>
+            <RNEListItem.Title h4>{singleMedia.title}</RNEListItem.Title>
+            <RNEListItem.Subtitle>
+              {singleMedia.description}
+            </RNEListItem.Subtitle>
+
+            <>
+              <Button
+                title="Modify"
+                onPress={() => navigation.push('Modify', {file: singleMedia})}
+              ></Button>
+              <Button title="Delete" color="red" onPress={doDelete}></Button>
+            </>
+          </RNEListItem.Content>
+          <RNEListItem.Chevron />
+        </RNEListItem>
+      )}
+    </>
   );
 };
 

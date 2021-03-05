@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useContext} from 'react';
-import {StyleSheet, ActivityIndicator, TextInput} from 'react-native';
+import {StyleSheet, ActivityIndicator, TextInput, Alert} from 'react-native';
 import {Button} from 'react-native-elements';
 import PropTypes from 'prop-types';
 import {uploadsUrl} from '../utils/variables';
@@ -12,6 +12,7 @@ import * as ScreenOrientation from 'expo-screen-orientation';
 import {ScrollView} from 'react-native-gesture-handler';
 import {MainContext} from '../contexts/MainContext';
 import {Keyboard} from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const Single = ({route}) => {
   const {file} = route.params;
@@ -22,6 +23,7 @@ const Single = ({route}) => {
   const {getUser} = useUser();
   const {getComment} = useComment();
   const {postComment} = useComment();
+  const {deleteComm} = useComment();
   const [videoRef, setVideoRef] = useState(null);
   const [value, onChangeText] = useState('');
 
@@ -57,6 +59,32 @@ const Single = ({route}) => {
     fetchComments();
     onChangeText('');
     Keyboard.dismiss();
+  };
+
+  const deleteComment = (key) => {
+    Alert.alert(
+      'Delete',
+      'this comment permanently?',
+      [
+        {
+          text: 'Cancel',
+        },
+        {
+          text: 'Ok',
+          onPress: async () => {
+            const userToken = await AsyncStorage.getItem('userToken');
+            try {
+              console.log(key);
+              await deleteComm(key, userToken);
+              fetchComments();
+            } catch (error) {
+              console.error(error);
+            }
+          },
+        },
+      ],
+      {cancelable: true}
+    );
   };
 
   const fetchAvatar = async () => {
@@ -128,9 +156,12 @@ const Single = ({route}) => {
       lock();
     };
   }, [videoRef]);
-  return (
 
-    <ScrollView keyboardShouldPersistTaps="always" style={{backgroundColor: '#f5e4d5'}}>
+  return (
+    <ScrollView
+      keyboardShouldPersistTaps="always"
+      style={{backgroundColor: '#f5e4d5'}}
+    >
       <Card containerStyle={styles.card}>
         <Card.Title h4>{file.title}</Card.Title>
         <Card.Title>{moment(file.time_added).format('LLL')}</Card.Title>
@@ -181,7 +212,27 @@ const Single = ({route}) => {
         {comment.length > 0 ? (
           <>
             {comment.map((item) => (
-              <Text key={item.comment_id}>{item.comment}</Text>
+              <Card key={item.comment_id}>
+                <Text>{item.owner.username}</Text>
+                <Text>{item.comment}</Text>
+                <Text>{moment(item.time_added).format('LLL')}</Text>
+                <Button
+                  title=""
+                  icon={
+                    <Icon
+                      name="trash-outline"
+                      size={34}
+                      color="#0E2A25"
+                      fontWeight="bold"
+                    />
+                  }
+                  iconRight
+                  type="clear"
+                  onPress={() => {
+                    deleteComment(item.comment_id);
+                  }}
+                ></Button>
+              </Card>
             ))}
           </>
         ) : (
@@ -226,5 +277,4 @@ const styles = StyleSheet.create({
 Single.propTypes = {
   route: PropTypes.object,
 };
-
 export default Single;
