@@ -7,7 +7,6 @@ import {Card, Text, ListItem, Avatar} from 'react-native-elements';
 import {useTag} from '../hooks/ApiHooks';
 import {uploadsUrl} from '../utils/variables';
 import {ScrollView} from 'react-native-gesture-handler';
-import {View} from 'react-native';
 import {ImageBackground} from 'react-native';
 
 const Profile = ({navigation}) => {
@@ -38,7 +37,7 @@ const Profile = ({navigation}) => {
   }, []);
 
   return (
-    <ScrollView style={{backgroundColor: '#f5e4d5'}}>
+    <ScrollView style={{backgroundColor: '#FEFEF2'}}>
       <Card containerStyle={styles.card}>
         <ImageBackground
           source={require('../assets/bg.jpg')}
@@ -125,8 +124,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#FEFEF2',
     borderColor: '#FEFEF2',
     borderRadius: 10,
-    marginTop: 8,
+    marginTop: 25,
     borderWidth: 0,
+    marginBottom: 8,
   },
   content: {
     backgroundColor: '#FEFEF2',

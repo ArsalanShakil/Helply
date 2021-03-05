@@ -16,12 +16,19 @@ import LoginForm from '../components/LoginForm';
 import RegisterForm from '../components/RegisterForm';
 import {Card, ListItem, Text} from 'react-native-elements';
 import {ScrollView} from 'react-native-gesture-handler';
+// import * as Font from 'expo-font';
+// import {AppLoading} from 'expo';
 
 const Login = ({navigation}) => {
+  // const [fontsLoaded, setFontLoaded] = useState(false);
   const {setIsLoggedIn, setUser} = useContext(MainContext);
   const [formToggle, setFormToggle] = useState(true);
   const {checkToken} = useUser();
-
+  /*   const loadFonts = () => {
+    return Font.loadAsync({
+      'Raleway-Black': require('../assets/fonts/Raleway-Black.ttf'),
+    });
+  }; */
   const getToken = async () => {
     const userToken = await AsyncStorage.getItem('userToken');
     console.log('token', userToken);
@@ -40,7 +47,15 @@ const Login = ({navigation}) => {
   useEffect(() => {
     getToken();
   }, []);
-
+  /*  if (!fontsLoaded) {
+    return (
+      <AppLoading
+        startAsync={loadFonts}
+        onFinish={() => setFontLoaded(true)}
+        onError={(err) => console.error(err)}
+      />
+    );
+  } */
   return (
     <ScrollView contentContainerStyle={styles.sv}>
       <KeyboardAvoidingView
@@ -116,7 +131,6 @@ const styles = StyleSheet.create({
   title: {
     color: '#0E2A25',
     fontSize: 40,
-    fontFamily: 'Roboto',
     fontWeight: 'normal',
     marginBottom: 60,
   },

@@ -129,8 +129,10 @@ const Single = ({route}) => {
     };
   }, [videoRef]);
   return (
-
-    <ScrollView keyboardShouldPersistTaps="always" style={{backgroundColor: '#f5e4d5'}}>
+    <ScrollView
+      keyboardShouldPersistTaps="always"
+      style={{backgroundColor: '#f5e4d5'}}
+    >
       <Card containerStyle={styles.card}>
         <Card.Title h4>{file.title}</Card.Title>
         <Card.Title>{moment(file.time_added).format('LLL')}</Card.Title>
@@ -220,6 +222,7 @@ const styles = StyleSheet.create({
     borderColor: '#FEFEF2',
     borderRadius: 10,
     marginTop: 8,
+    marginBottom: 8,
   },
 });
 
