@@ -3,7 +3,14 @@ import {StyleSheet, ActivityIndicator, TextInput, Alert} from 'react-native';
 import {Button} from 'react-native-elements';
 import PropTypes from 'prop-types';
 import {uploadsUrl} from '../utils/variables';
-import {Avatar, Card, ListItem, Text, Rating} from 'react-native-elements';
+import {
+  Avatar,
+  Card,
+  ListItem,
+  Text,
+  Rating,
+  AirbnbRating,
+} from 'react-native-elements';
 import moment from 'moment';
 import {useTag, useUser, useComment} from '../hooks/ApiHooks';
 import {Video} from 'expo-av';
@@ -208,14 +215,21 @@ const Single = ({route}) => {
           }
         })()}
         <Card.Divider />
-        <Rating
+        <Text>How do you feel today?</Text>
+        <AirbnbRating
           showRating
-          startingValue={0}
+          defaultRating={0}
           type="star"
           ratingCount={5}
           imageSize={60}
           showRating
           onFinishRating={ratingCompleted}
+          readonly={false}
+          selectedColor="#3498db"
+          unSelectedColor="#BDC3C7"
+          ratingBackgroundColor="#c8c7c8"
+          reviewColor="#3498db"
+          reviewSize={30}
         />
         <Card.Divider />
         <ListItem containerStyle={{backgroundColor: '#FEFEF2'}}>
