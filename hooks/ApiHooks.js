@@ -28,12 +28,9 @@ const useRating = () => {
       };
 
       const ratingData = await doFetch(baseUrl + 'ratings/file/' + id, options);
-      console.log(ratingData, []);
-      if (ratingData.length > 0) {
-        return ratingData[0].rating;
-      } else {
-        return 0;
-      }
+      console.log(ratingData);
+
+      return ratingData;
     } catch (error) {
       throw new Error(error.message);
     }

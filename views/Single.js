@@ -27,6 +27,7 @@ const Single = ({route}) => {
   const [owner, setOwner] = useState({username: 'somebody'});
   const [comment, setComment] = useState([]);
   const [rating, setRating] = useState([]);
+  const [cannotRate, setCannotRate] = useState([]);
   const {getFilesByTag} = useTag();
   const {getUser} = useUser();
   const {getComment} = useComment();
@@ -43,8 +44,13 @@ const Single = ({route}) => {
     try {
       const userToken = await AsyncStorage.getItem('userToken');
       const fileRating = await getRating(file.file_id, userToken);
-      setRating(fileRating);
-      console.log(fileRating);
+      if (fileRating.length > 0) {
+        setRating(fileRating[0].rating);
+        setCannotRate(true);
+      } else {
+        setRating(0);
+        setCannotRate(false);
+      }
     } catch (error) {
       console.error(error.message);
     }
@@ -68,6 +74,7 @@ const Single = ({route}) => {
       ),
     };
     postRating(options);
+    setCannotRate(true);
   };
 
   // comments
@@ -260,7 +267,7 @@ const Single = ({route}) => {
           reviewColor="#3498db"
           reviewSize={30}
           defaultRating={rating}
-          isDisabled={false}
+          isDisabled={cannotRate}
           onFinishRating={ratingCompleted}
         />
         <Card.Divider />
