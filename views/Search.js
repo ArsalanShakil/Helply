@@ -11,15 +11,6 @@ const Search = ({navigation}) => {
   const {update, setUpdate} = useContext(MainContext);
   const [value, onChangeText] = useState('');
 
-  const doUpdate = async () => {
-    try {
-      setUpdate(update + 1);
-    } catch (error) {
-      Alert.alert('Update', 'Failed');
-      console.error(error);
-    }
-  };
-
   return (
     <SafeAreaView style={GlobalStyles.droidSafeArea}>
       <TextInput
@@ -28,7 +19,7 @@ const Search = ({navigation}) => {
         onChangeText={(text) => onChangeText(text)}
         value={value}
       />
-      <Button title="Search" onPress={doUpdate} />
+
       <Searchlist
         navigation={navigation}
         searchKeyword={value.toLowerCase()}
