@@ -26,6 +26,7 @@ const Single = ({route}) => {
   const [avatar, setAvatar] = useState('http://placekitten.com/100');
   const [owner, setOwner] = useState({username: 'somebody'});
   const [comment, setComment] = useState([]);
+  const [rating, setRating] = useState([]);
   const {getFilesByTag} = useTag();
   const {getUser} = useUser();
   const {getComment} = useComment();
@@ -37,10 +38,19 @@ const Single = ({route}) => {
   const [value, onChangeText] = useState('');
 
   // rating
+
   const fetchRating = async () => {
-    return 0;
+    try {
+      const userToken = await AsyncStorage.getItem('userToken');
+      const fileRating = await getRating(file.file_id, userToken);
+      setRating(fileRating);
+      console.log(fileRating);
+    } catch (error) {
+      console.error(error.message);
+    }
   };
 
+  fetchRating();
   const ratingCompleted = async (rating) => {
     const userToken = await AsyncStorage.getItem('userToken');
     const options = {
@@ -243,13 +253,13 @@ const Single = ({route}) => {
           type="star"
           ratingCount={5}
           imageSize={60}
-          showRating
+          showRating={true}
           selectedColor="#3498db"
           unSelectedColor="#BDC3C7"
           ratingBackgroundColor="#c8c7c8"
           reviewColor="#3498db"
           reviewSize={30}
-          defaultRating={fetchRating}
+          defaultRating={rating}
           isDisabled={false}
           onFinishRating={ratingCompleted}
         />

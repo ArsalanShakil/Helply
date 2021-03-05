@@ -27,12 +27,13 @@ const useRating = () => {
         headers: {'x-access-token': token},
       };
 
-      const commentData = await doFetch(
-        baseUrl + 'comments/file/' + id,
-        options
-      );
-
-      return newCommentData;
+      const ratingData = await doFetch(baseUrl + 'ratings/file/' + id, options);
+      console.log(ratingData, []);
+      if (ratingData.length > 0) {
+        return ratingData[0].rating;
+      } else {
+        return 0;
+      }
     } catch (error) {
       throw new Error(error.message);
     }
