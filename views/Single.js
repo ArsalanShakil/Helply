@@ -12,7 +12,7 @@ import {
   AirbnbRating,
 } from 'react-native-elements';
 import moment from 'moment';
-import {useTag, useUser, useComment} from '../hooks/ApiHooks';
+import {useTag, useUser, useComment, useRating} from '../hooks/ApiHooks';
 import {Video} from 'expo-av';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as ScreenOrientation from 'expo-screen-orientation';
@@ -31,11 +31,33 @@ const Single = ({route}) => {
   const {getComment} = useComment();
   const {postComment} = useComment();
   const {deleteComm} = useComment();
+  const {getRating} = useRating();
+  const {postRating} = useRating();
   const [videoRef, setVideoRef] = useState(null);
   const [value, onChangeText] = useState('');
 
+  // rating
+  const fetchRating = async () => {
+    return 0;
+  };
+
   const ratingCompleted = async (rating) => {
-    console.log('Rating is: ' + rating);
+    const userToken = await AsyncStorage.getItem('userToken');
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-access-token': userToken,
+      },
+      body: JSON.stringify(
+        {
+          file_id: file.file_id,
+          rating: rating,
+        },
+        userToken
+      ),
+    };
+    postRating(options);
   };
 
   // comments
@@ -218,18 +240,18 @@ const Single = ({route}) => {
         <Text>How do you feel today?</Text>
         <AirbnbRating
           showRating
-          defaultRating={0}
           type="star"
           ratingCount={5}
           imageSize={60}
           showRating
-          onFinishRating={ratingCompleted}
-          readonly={false}
           selectedColor="#3498db"
           unSelectedColor="#BDC3C7"
           ratingBackgroundColor="#c8c7c8"
           reviewColor="#3498db"
           reviewSize={30}
+          defaultRating={fetchRating}
+          isDisabled={false}
+          onFinishRating={ratingCompleted}
         />
         <Card.Divider />
         <ListItem containerStyle={{backgroundColor: '#FEFEF2'}}>

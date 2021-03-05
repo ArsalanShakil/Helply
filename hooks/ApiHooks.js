@@ -19,6 +19,38 @@ const doFetch = async (url, options = {}) => {
   }
 };
 
+const useRating = () => {
+  const getRating = async (id, token) => {
+    try {
+      const options = {
+        method: 'GET',
+        headers: {'x-access-token': token},
+      };
+
+      const commentData = await doFetch(
+        baseUrl + 'comments/file/' + id,
+        options
+      );
+
+      return newCommentData;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  };
+
+  const postRating = async (options) => {
+    try {
+      const result = await doFetch(baseUrl + 'ratings', options);
+      console.log(options);
+      return result;
+    } catch (error) {
+      throw new Error('postRating error: ' + error.message);
+    }
+  };
+
+  return {getRating, postRating};
+};
+
 const useLoadMedia = (myFilesOnly, userId) => {
   const [mediaArray, setMediaArray] = useState([]);
   const {update} = useContext(MainContext);
@@ -173,6 +205,7 @@ const useComment = () => {
   };
   return {getComment, postComment, deleteComm};
 };
+
 const useTag = () => {
   const getFilesByTag = async (tag) => {
     try {
@@ -249,4 +282,12 @@ const useMedia = () => {
   return {upload, updateFile, deleteFile};
 };
 
-export {useLoadMedia, useLogin, useUser, useTag, useMedia, useComment};
+export {
+  useLoadMedia,
+  useLogin,
+  useUser,
+  useTag,
+  useMedia,
+  useComment,
+  useRating,
+};
