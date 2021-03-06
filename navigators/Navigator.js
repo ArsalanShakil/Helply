@@ -4,7 +4,6 @@ import React, {useContext, useState, useEffect} from 'react';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Button} from 'react-native-elements';
-import {TouchableOpacity} from 'react-native';
 
 import {createStackNavigator} from '@react-navigation/stack';
 import {
@@ -20,7 +19,6 @@ import Upload from '../views/Upload';
 import MyFiles from '../views/MyFiles';
 import Modify from '../views/Modify';
 import OnboardingScreen from '../views/OnboardingScreen';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {DrawerActions} from '@react-navigation/native';
 import Search from '../views/Search';
 
@@ -123,7 +121,18 @@ const StackScreen = () => {
               ),
             })}
           />
-          <Stack.Screen name="Modify" component={Modify} />
+          <Stack.Screen
+            name="Modify"
+            component={Modify}
+            options={{
+              title: 'My Posts',
+              headerStyle: {
+                backgroundColor: '#FEFEF2',
+              },
+              headerTintColor: '#0E2A25',
+              headerTitleStyle: {},
+            }}
+          />
           <Stack.Screen
             name="My Files"
             component={MyFiles}
