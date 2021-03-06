@@ -5,6 +5,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
+  StyleSheet,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import {Input, Text, Image, Button, Card} from 'react-native-elements';
@@ -15,6 +16,8 @@ import {useMedia, useTag} from '../hooks/ApiHooks';
 import {MainContext} from '../contexts/MainContext';
 import {appIdentifier} from '../utils/variables';
 import {Audio, Video} from 'expo-av';
+import Icon from 'react-native-vector-icons/Ionicons';
+import {View} from 'react-native';
 
 const Upload = ({navigation}) => {
   const [image, setImage] = useState(null);
@@ -160,20 +163,23 @@ const Upload = ({navigation}) => {
     const uri = recording.getURI();
     setFiletype('audio');
     setImage(uri);
-    //console.log('Recording stopped and stored at', uri);
+    // console.log('Recording stopped and stored at', uri);
   }
 
   return (
-    <ScrollView>
+    <ScrollView style={{backgroundColor: '#FEFEF2'}}>
       <KeyboardAvoidingView behavior="position" enabled>
-        <Card>
-          <Text h4>Upload media file</Text>
+        <Card containerStyle={styles.card}>
+          <Text h4 style={{color: '#0E2A25'}}>
+            Upload media file
+          </Text>
           {image && (
             <>
               {filetype === 'image' ? (
                 <Image
                   source={{uri: image}}
                   style={{width: '100%', height: undefined, aspectRatio: 1}}
+                  containerStyle={{borderRadius: 10, margin: 16}}
                 />
               ) : (
                 <Video
@@ -189,24 +195,81 @@ const Upload = ({navigation}) => {
             value={inputs.title}
             onChangeText={(txt) => handleInputChange('title', txt)}
             errorMessage={uploadErrors.title}
+            inputContainerStyle={{borderBottomWidth: 0, padding: 16}}
           />
           <Input
             placeholder="description"
             value={inputs.description}
             onChangeText={(txt) => handleInputChange('description', txt)}
             errorMessage={uploadErrors.description}
+            inputContainerStyle={{borderBottomWidth: 0, paddingLeft: 16}}
+          />
+          <Card.Divider />
+          <Button
+            title="Open library"
+            icon={
+              <Icon
+                name="image-outline"
+                size={30}
+                color="#0E2A25"
+                fontWeight="bold"
+              />
+            }
+            iconLeft
+            type="clear"
+            onPress={() => pickImage('library')}
+            titleStyle={styles.buttonTitle}
+            containerStyle={{marginRight: 150}}
           />
           <Button
-            title="Choose from library"
-            onPress={() => pickImage('library')}
+            title="Take photo"
+            icon={
+              <Icon
+                name="camera-outline"
+                size={30}
+                color="#0E2A25"
+                fontWeight="bold"
+              />
+            }
+            iconLeft
+            type="clear"
+            onPress={() => pickImage('photo')}
+            titleStyle={styles.buttonTitle}
+            containerStyle={{marginRight: 157}}
           />
-          <Button title="Take photo" onPress={() => pickImage('photo')} />
-          <Button title="Take video" onPress={() => pickImage('video')} />
+          <Button
+            title="Take video"
+            icon={
+              <Icon
+                name="videocam-outline"
+                size={30}
+                color="#0E2A25"
+                fontWeight="bold"
+              />
+            }
+            iconLeft
+            type="clear"
+            onPress={() => pickImage('video')}
+            titleStyle={styles.buttonTitle}
+            containerStyle={{marginRight: 155}}
+          />
           <Button
             title={recording ? 'Stop Recording' : 'Start Recording'}
             onPress={recording ? stopRecording : startRecording}
+            icon={
+              <Icon
+                name="mic-outline"
+                size={30}
+                color="#0E2A25"
+                fontWeight="bold"
+              />
+            }
+            iconLeft
+            type="clear"
+            titleStyle={styles.buttonTitle}
+            containerStyle={{marginRight: 125}}
           />
-          {isUploading && <ActivityIndicator size="large" color="#0000ff" />}
+          {isUploading && <ActivityIndicator size="large" color="#0E2A25" />}
 
           <Button
             title="Upload file"
@@ -216,13 +279,52 @@ const Upload = ({navigation}) => {
               uploadErrors.description !== null ||
               image === null
             }
+            icon={
+              <Icon
+                name="cloud-upload-outline"
+                size={30}
+                color="#FEFEF2"
+                fontWeight="bold"
+              />
+            }
+            iconLeft
+            titleStyle={{
+              color: '#FEFEF2',
+              paddingLeft: 16,
+            }}
+            buttonStyle={{marginRight: '53%', backgroundColor: '#0E2A25'}}
           />
-          <Button title="Reset" onPress={doReset} />
+          <Button
+            title="Reset"
+            icon={
+              <Icon
+                name="refresh-outline"
+                size={30}
+                color="#0E2A25"
+                fontWeight="bold"
+              />
+            }
+            iconLeft
+            type="clear"
+            onPress={doReset}
+            titleStyle={styles.buttonTitle}
+            containerStyle={{marginRight: '65%'}}
+          />
         </Card>
       </KeyboardAvoidingView>
     </ScrollView>
   );
 };
+const styles = StyleSheet.create({
+  card: {
+    backgroundColor: '#FEFEF2',
+    borderRadius: 10,
+  },
+  buttonTitle: {
+    color: '#0E2A25',
+    paddingLeft: 16,
+  },
+});
 
 Upload.propTypes = {
   navigation: PropTypes.object,
