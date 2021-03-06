@@ -17,7 +17,6 @@ import {MainContext} from '../contexts/MainContext';
 import {appIdentifier} from '../utils/variables';
 import {Audio, Video} from 'expo-av';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {View} from 'react-native';
 
 const Upload = ({navigation}) => {
   const [image, setImage] = useState(null);
