@@ -278,7 +278,7 @@ const Single = ({route}) => {
           <Text style={{fontWeight: 'bold', fontSize: 20}}>
             {owner.username}
           </Text>
-          <Text style={{width: 170, fontSize: 18}}>{file.description}</Text>
+          <Text style={{width: 150, fontSize: 18}}>{file.description}</Text>
         </ListItem>
         {comment.length > 0 ? (
           <>
