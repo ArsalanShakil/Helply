@@ -116,7 +116,6 @@ const styles = StyleSheet.create({
   title: {
     color: '#0E2A25',
     fontSize: 40,
-    fontFamily: 'Roboto',
     fontWeight: 'normal',
     marginBottom: 60,
   },
