@@ -69,7 +69,7 @@ const ListItem = ({navigation, singleMedia, isMyFile}) => {
         >
           {singleMedia.title}
         </RNEListItem.Title>
-        <RNEListItem.Subtitle style={{paddingBottom: 32, fontSize: 16}}>
+        <RNEListItem.Subtitle style={{paddingBottom: 32, fontSize: 18}}>
           {singleMedia.description}
         </RNEListItem.Subtitle>
         {isMyFile && (

@@ -20,6 +20,7 @@ import {ScrollView} from 'react-native-gesture-handler';
 import {MainContext} from '../contexts/MainContext';
 import {Keyboard} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {View} from 'react-native';
 
 const Single = ({route}) => {
   const {file} = route.params;
@@ -254,41 +255,48 @@ const Single = ({route}) => {
           }
         })()}
         <Card.Divider />
-        <Text>How do you feel today?</Text>
-        <AirbnbRating
-          showRating
-          type="star"
-          ratingCount={5}
-          imageSize={60}
-          showRating={true}
-          selectedColor="#3498db"
-          unSelectedColor="#BDC3C7"
-          ratingBackgroundColor="#c8c7c8"
-          reviewColor="#3498db"
-          reviewSize={30}
-          defaultRating={rating}
-          isDisabled={cannotRate}
-          onFinishRating={ratingCompleted}
-        />
-        <Card.Divider />
+        <View style={styles.rating}>
+          <Text style={{fontSize: 16}}>How do you feel today?</Text>
+          <AirbnbRating
+            showRating
+            type="star"
+            ratingCount={5}
+            imageSize={30}
+            showRating={true}
+            selectedColor="#0E2A25"
+            unSelectedColor="#BDC3C7"
+            ratingBackgroundColor="#0E2A25"
+            reviewColor="#0E2A25"
+            reviewSize={20}
+            defaultRating={rating}
+            isDisabled={cannotRate}
+            onFinishRating={ratingCompleted}
+          />
+        </View>
         <ListItem containerStyle={{backgroundColor: '#FEFEF2'}}>
           <Avatar source={{uri: avatar}} rounded />
-          <Text style={{fontWeight: 'bold'}}>{owner.username}</Text>
-          <Text style={{width: 170}}>{file.description}</Text>
+          <Text style={{fontWeight: 'bold', fontSize: 20}}>
+            {owner.username}
+          </Text>
+          <Text style={{width: 170, fontSize: 18}}>{file.description}</Text>
         </ListItem>
         {comment.length > 0 ? (
           <>
             {comment.map((item) => (
-              <Card key={item.comment_id}>
-                <Text>{item.owner.username}</Text>
-                <Text>{item.comment}</Text>
-                <Text>{moment(item.time_added).format('LLL')}</Text>
+              <Card key={item.comment_id} containerStyle={styles.comment}>
+                <Text style={{fontWeight: 'bold', fontSize: 20}}>
+                  {item.owner.username}
+                </Text>
+                <Text style={{fontSize: 20}}>{item.comment}</Text>
+                <Text style={{marginTop: 16}}>
+                  {moment(item.time_added).format('LLL')}
+                </Text>
                 <Button
                   title=""
                   icon={
                     <Icon
                       name="trash-outline"
-                      size={34}
+                      size={26}
                       color="#0E2A25"
                       fontWeight="bold"
                     />
@@ -298,22 +306,49 @@ const Single = ({route}) => {
                   onPress={() => {
                     deleteComment(item.comment_id);
                   }}
+                  buttonStyle={{width: 50, marginLeft: '80%'}}
                 ></Button>
               </Card>
             ))}
           </>
         ) : (
           <>
-            <Text>Noone has commented yet...</Text>
+            <Text style={{padding: 16, fontSize: 16}}>
+              No one has commented yet...
+            </Text>
           </>
         )}
         <TextInput
-          style={{height: 80, borderColor: 'gray', borderWidth: 1}}
-          placeholder="comment"
+          style={{
+            height: 50,
+            borderColor: '#D0DCD0',
+            borderWidth: 1,
+            backgroundColor: '#f3fff2',
+            paddingLeft: 20,
+            borderRadius: 50,
+          }}
+          placeholder="comment..."
           onChangeText={(text) => onChangeText(text)}
           value={value}
         />
-        <Button title="submit comment" onPress={sendComment} />
+        <Button
+          title="send comment"
+          onPress={sendComment}
+          icon={<Icon name="send" size={26} color="#FEFEF2" />}
+          iconRight
+          titleStyle={{
+            paddingRight: 24,
+            color: '#FEFEF2',
+          }}
+          buttonStyle={{
+            backgroundColor: '#0E2A25',
+            borderRadius: 10,
+            marginTop: 16,
+            height: 50,
+            width: 200,
+            marginLeft: '16%',
+          }}
+        />
       </Card>
     </ScrollView>
   );
@@ -338,6 +373,37 @@ const styles = StyleSheet.create({
     borderColor: '#FEFEF2',
     borderRadius: 10,
     marginTop: 8,
+    marginBottom: 8,
+  },
+  rating: {
+    backgroundColor: '#f3fff2',
+    borderRadius: 10,
+    padding: 16,
+    marginBottom: 16,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: 0.34,
+    shadowRadius: 6.27,
+
+    elevation: 6,
+  },
+  comment: {
+    marginBottom: 16,
+    marginTop: 0,
+    borderRadius: 10,
+    backgroundColor: '#f3fff2',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: 0.34,
+    shadowRadius: 6.27,
+
+    elevation: 3,
   },
 });
 
