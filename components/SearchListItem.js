@@ -2,11 +2,13 @@ import React, {useContext} from 'react';
 import PropTypes from 'prop-types';
 import {uploadsUrl} from '../utils/variables';
 import {Avatar, ListItem as RNEListItem} from 'react-native-elements';
-import {Button} from 'react-native';
+import {Button} from 'react-native-elements';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useMedia} from '../hooks/SearchHooks';
 import {MainContext} from '../contexts/MainContext';
 import {Alert} from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
+import {View} from 'react-native';
 
 const SearchListItem = ({navigation, singleMedia, isSearchFile}) => {
   // console.log(props);
@@ -42,12 +44,15 @@ const SearchListItem = ({navigation, singleMedia, isSearchFile}) => {
       {isSearchFile && (
         <RNEListItem
           bottomDivider
+          containerStyle={{
+            backgroundColor: '#FEFEF2',
+          }}
           onPress={() => {
             navigation.navigate('Single', {file: singleMedia});
           }}
         >
           <Avatar
-            size="large"
+            size="xlarge"
             square
             source={
               singleMedia.thumbnails
@@ -57,19 +62,55 @@ const SearchListItem = ({navigation, singleMedia, isSearchFile}) => {
                 : require('../assets/play.jpg')
             }
           ></Avatar>
-
           <RNEListItem.Content>
-            <RNEListItem.Title h4>{singleMedia.title}</RNEListItem.Title>
-            <RNEListItem.Subtitle>
+            <RNEListItem.Title
+              text
+              style={{fontSize: 16, fontWeight: '400', paddingBottom: 16}}
+            >
+              {singleMedia.title}
+            </RNEListItem.Title>
+            <RNEListItem.Subtitle style={{fontSize: 16}}>
               {singleMedia.description}
             </RNEListItem.Subtitle>
 
             <>
-              <Button
-                title="Modify"
-                onPress={() => navigation.push('Modify', {file: singleMedia})}
-              ></Button>
-              <Button title="Delete" color="red" onPress={doDelete}></Button>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  left: 70,
+                  paddingTop: 30,
+                }}
+              >
+                <Button
+                  title=""
+                  icon={
+                    <Icon
+                      name="create-outline"
+                      size={30}
+                      color="#0E2A25"
+                      fontWeight="bold"
+                    />
+                  }
+                  iconRight
+                  type="clear"
+                  onPress={() => navigation.push('Modify', {file: singleMedia})}
+                ></Button>
+                <Button
+                  title=""
+                  icon={
+                    <Icon
+                      name="trash-outline"
+                      size={30}
+                      color="#0E2A25"
+                      fontWeight="bold"
+                    />
+                  }
+                  iconRight
+                  type="clear"
+                  color="red"
+                  onPress={doDelete}
+                ></Button>
+              </View>
             </>
           </RNEListItem.Content>
           <RNEListItem.Chevron />
