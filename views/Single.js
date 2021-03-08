@@ -214,8 +214,23 @@ const Single = ({route}) => {
       style={{backgroundColor: '#f5e4d5'}}
     >
       <Card containerStyle={styles.card}>
-        <Card.Title h4>{file.title}</Card.Title>
-        <Card.Title>{moment(file.time_added).format('LLL')}</Card.Title>
+        <Card.Title
+          h4
+          accessible={true}
+          accessibilityLabel="Post title"
+          accessibilityHint="Title of the post"
+          accessibilityRole="text"
+        >
+          {file.title}
+        </Card.Title>
+        <Card.Title
+          accessible={true}
+          accessibilityLabel="Time of post"
+          accessibilityHint="Time when the post was created"
+          accessibilityRole="text"
+        >
+          {moment(file.time_added).format('LLL')}
+        </Card.Title>
         <Card.Divider />
         {(() => {
           if (file.media_type === 'image') {
@@ -224,6 +239,10 @@ const Single = ({route}) => {
                 source={{uri: uploadsUrl + file.filename}}
                 style={styles.image}
                 PlaceholderContent={<ActivityIndicator />}
+                accessible={true}
+                accessibilityLabel="Image"
+                accessibilityHint="Image in the post"
+                accessibilityRole="image"
               />
             );
           } else if (file.media_type === 'video') {
@@ -238,6 +257,9 @@ const Single = ({route}) => {
                   console.error('video', err);
                 }}
                 posterSource={{uri: uploadsUrl + file.screenshot}}
+                accessible={true}
+                accessibilityLabel="Video"
+                accessibilityHint="Video in the post"
               />
             );
           } else if (file.media_type === 'audio') {
@@ -250,13 +272,24 @@ const Single = ({route}) => {
                   console.error('audio', err);
                 }}
                 posterSource={{uri: 'https://placekitten.com/230'}}
+                accessible={true}
+                accessibilityLabel="Audio"
+                accessibilityHint="Audio in the post"
               />
             );
           }
         })()}
         <Card.Divider />
         <View style={styles.rating}>
-          <Text style={{fontSize: 16}}>How do you feel today?</Text>
+          <Text
+            style={{fontSize: 16}}
+            accessible={true}
+            accessibilityLabel="How are you feeling today?"
+            accessibilityHint="Answer the question below with stars"
+            accessibilityRole="text"
+          >
+            How do you feel today?
+          </Text>
           <AirbnbRating
             showRating
             type="star"
@@ -271,24 +304,62 @@ const Single = ({route}) => {
             defaultRating={rating}
             isDisabled={cannotRate}
             onFinishRating={ratingCompleted}
+            accessible={true}
+            accessibilityLabel="Rating"
+            accessibilityHint="Answer the question out of 5 stars"
+            accessibilityRole="button"
           />
         </View>
         <ListItem containerStyle={{backgroundColor: '#FEFEF2'}}>
           <Avatar source={{uri: avatar}} rounded />
-          <Text style={{fontWeight: 'bold', fontSize: 20}}>
+          <Text
+            style={{fontWeight: 'bold', fontSize: 20}}
+            accessible={true}
+            accessibilityLabel="Username"
+            accessibilityHint="Username of the person who created the post"
+            accessibilityRole="text"
+          >
             {owner.username}
           </Text>
-          <Text style={{width: 150, fontSize: 18}}>{file.description}</Text>
+          <Text
+            style={{width: 150, fontSize: 18}}
+            accessible={true}
+            accessibilityLabel="Post description"
+            accessibilityHint="Description of the post"
+            accessibilityRole="text"
+          >
+            {file.description}
+          </Text>
         </ListItem>
         {comment.length > 0 ? (
           <>
             {comment.map((item) => (
               <Card key={item.comment_id} containerStyle={styles.comment}>
-                <Text style={{fontWeight: 'bold', fontSize: 20}}>
+                <Text
+                  style={{fontWeight: 'bold', fontSize: 20}}
+                  accessible={true}
+                  accessibilityLabel="Username of the commenter"
+                  accessibilityHint="Displays the name of the commenter"
+                  accessibilityRole="text"
+                >
                   {item.owner.username}
                 </Text>
-                <Text style={{fontSize: 20}}>{item.comment}</Text>
-                <Text style={{marginTop: 16}}>
+                <Text
+                  style={{fontSize: 20}}
+                  accessible={true}
+                  accessibilityLabel="The comment"
+                  accessibilityHint="The comment the the user posted"
+                  accessibilityRole="text"
+                >
+                  {item.comment}
+                </Text>
+                <Text
+                  style={{marginTop: 16}}
+                  accessible={true}
+                  accessibilityLabel="Time of comment"
+                  accessibilityHint="Time when the comment was created"
+                  accessibilityRole="text"
+                >
                   {moment(item.time_added).format('LLL')}
                 </Text>
                 <Button
@@ -307,13 +378,23 @@ const Single = ({route}) => {
                     deleteComment(item.comment_id);
                   }}
                   buttonStyle={{width: 50, marginLeft: '80%'}}
+                  accessible={true}
+                  accessibilityLabel="Delete post"
+                  accessibilityHint="Deletes the post"
+                  accessibilityRole="button"
                 ></Button>
               </Card>
             ))}
           </>
         ) : (
           <>
-            <Text style={{padding: 16, fontSize: 16}}>
+            <Text
+              style={{padding: 16, fontSize: 16}}
+              accessible={true}
+              accessibilityLabel="No one commented"
+              accessibilityHint="No one has commented on this post yet"
+              accessibilityRole="text"
+            >
               No one has commented yet...
             </Text>
           </>
@@ -330,6 +411,9 @@ const Single = ({route}) => {
           placeholder="comment..."
           onChangeText={(text) => onChangeText(text)}
           value={value}
+          accessible={true}
+          accessibilityLabel="Comment"
+          accessibilityHint="Input comment to the post"
         />
         <Button
           title="send comment"
@@ -348,6 +432,10 @@ const Single = ({route}) => {
             width: 200,
             marginLeft: '16%',
           }}
+          accessible={true}
+          accessibilityLabel="Submit comment"
+          accessibilityHint="Submits the comment you wrote"
+          accessibilityRole="button"
         />
       </Card>
     </ScrollView>

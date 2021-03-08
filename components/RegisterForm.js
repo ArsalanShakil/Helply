@@ -57,6 +57,9 @@ const RegisterForm = ({navigation}) => {
         }}
         errorMessage={registerErrors.username}
         inputContainerStyle={styles.inputText}
+        accessible={true}
+        accessibilityLabel="Input Username"
+        accessibilityHint="Lets you input your username"
       />
       <Input
         autoCapitalize="none"
@@ -68,6 +71,9 @@ const RegisterForm = ({navigation}) => {
         secureTextEntry={true}
         errorMessage={registerErrors.password}
         inputContainerStyle={styles.inputText}
+        accessible={true}
+        accessibilityLabel="Input Password"
+        accessibilityHint="Lets you input your password"
       />
       <Input
         autoCapitalize="none"
@@ -79,6 +85,9 @@ const RegisterForm = ({navigation}) => {
         secureTextEntry={true}
         errorMessage={registerErrors.confirmPassword}
         inputContainerStyle={styles.inputText}
+        accessible={true}
+        accessibilityLabel="Confirm Password"
+        accessibilityHint="Lets you input your password again to match with previous one"
       />
       <Input
         autoCapitalize="none"
@@ -89,6 +98,9 @@ const RegisterForm = ({navigation}) => {
         }
         errorMessage={registerErrors.email}
         inputContainerStyle={styles.inputText}
+        accessible={true}
+        accessibilityLabel="Input Email"
+        accessibilityHint="Lets you input your email"
       />
       <Input
         autoCapitalize="none"
@@ -99,13 +111,21 @@ const RegisterForm = ({navigation}) => {
         }
         errorMessage={registerErrors.full_name}
         inputContainerStyle={styles.inputText}
+        accessible={true}
+        accessibilityLabel="Input Fullname"
+        accessibilityHint="Lets you input your fullname"
       />
       <Button
         title="Register!"
         onPress={doRegister}
         buttonStyle={styles.button}
-        icon={<Icon name="checkmark-circle" size={25} color="#0E2A25" />}
+        titleStyle={{paddingRight: 16}}
+        icon={<Icon name="checkmark-circle" size={25} color="#FEFEF2" />}
         iconRight
+        accessible={true}
+        accessibilityLabel="Register Button"
+        accessibilityHint="Lets you submit the register form"
+        accessibilityRole="button"
       />
     </View>
   );
@@ -126,7 +146,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     marginHorizontal: '20%',
     marginBottom: 20,
-    paddingLeft: 32,
+    paddingLeft: 25,
   },
 });
 RegisterForm.propTypes = {

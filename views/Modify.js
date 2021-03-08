@@ -58,7 +58,14 @@ const Modify = ({navigation, route}) => {
     <ScrollView style={{backgroundColor: '#FEFEF2'}}>
       <KeyboardAvoidingView behavior="position" enabled>
         <Card containerStyle={styles.card}>
-          <Text h4 style={{color: '#0E2A25'}}>
+          <Text
+            h4
+            style={{color: '#0E2A25'}}
+            accessible={true}
+            accessibilityLabel="Update the post info"
+            accessibilityHint="Lets you edit the post"
+            accessibilityRole="text"
+          >
             Update file info
           </Text>
           {/* TODO: add similar media view than Single.js */}
@@ -68,6 +75,9 @@ const Modify = ({navigation, route}) => {
             onChangeText={(txt) => handleInputChange('title', txt)}
             errorMessage={uploadErrors.title}
             inputContainerStyle={{borderBottomWidth: 0.5, padding: 16}}
+            accessible={true}
+            accessibilityLabel="Edit title"
+            accessibilityHint="Edit the title of the post"
           />
           <Input
             placeholder="description"
@@ -75,6 +85,9 @@ const Modify = ({navigation, route}) => {
             onChangeText={(txt) => handleInputChange('description', txt)}
             errorMessage={uploadErrors.description}
             inputContainerStyle={{borderBottomWidth: 0.5, padding: 16}}
+            accessible={true}
+            accessibilityLabel="Edit description"
+            accessibilityHint="Edit the description of the post"
           />
           {isUploading && <ActivityIndicator size="large" color="#0E2A25" />}
 
@@ -102,6 +115,10 @@ const Modify = ({navigation, route}) => {
             // disabled={
             //   uploadErrors.title !== null || uploadErrors.description !== null
             // }
+            accessible={true}
+            accessibilityLabel="Update"
+            accessibilityHint="Updates the cahnges to title and description of the post"
+            accessibilityRole="button"
           />
           <Button
             title="Reset"
@@ -125,6 +142,10 @@ const Modify = ({navigation, route}) => {
               marginTop: 16,
               marginBottom: 16,
             }}
+            accessible={true}
+            accessibilityLabel="Reset"
+            accessibilityHint="Resets the title and description to it original form"
+            accessibilityRole="button"
           />
         </Card>
       </KeyboardAvoidingView>

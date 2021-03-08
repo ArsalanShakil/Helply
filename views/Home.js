@@ -7,7 +7,12 @@ import PropTypes from 'prop-types';
 const Home = ({navigation}) => {
   return (
     <SafeAreaView style={GlobalStyles.droidSafeArea}>
-      <List navigation={navigation} />
+      <List
+        navigation={navigation}
+        accessible={true}
+        accessibilityLabel="Home Screen"
+        accessibilityHint="Shows all the posts"
+      />
       <StatusBar style="auto" />
     </SafeAreaView>
   );
