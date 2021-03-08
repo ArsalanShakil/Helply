@@ -61,11 +61,43 @@ const DrawerScreen = () => {
           return <Icon name={iconName} size={size} color={color} />;
         },
       })}
+      accessible={true}
+      accessibilityLabel="Navigation drawer"
+      accessibilityHint="Shows list of options to navigate between screens"
+      accessibilityRole="menubar"
     >
-      <Drawer.Screen name="Home" component={Home} />
-      <Drawer.Screen name="Profile" component={Profile} />
-      <Drawer.Screen name="Upload" component={Upload} />
-      <Drawer.Screen name="Search" component={Search} />
+      <Drawer.Screen
+        name="Home"
+        component={Home}
+        accessible={true}
+        accessibilityLabel="Home Sceern"
+        accessibilityHint="Shows list of posts"
+        accessibilityRole="menuitem"
+      />
+      <Drawer.Screen
+        name="Profile"
+        component={Profile}
+        accessible={true}
+        accessibilityLabel="Profile Screen"
+        accessibilityHint="Shows information about your id"
+        accessibilityRole="menuitem"
+      />
+      <Drawer.Screen
+        name="Upload"
+        component={Upload}
+        accessible={true}
+        accessibilityLabel="Upload Screen"
+        accessibilityHint="Shows list of options to create post"
+        accessibilityRole="menuitem"
+      />
+      <Drawer.Screen
+        name="Search"
+        component={Search}
+        accessible={true}
+        accessibilityLabel="Search Screen"
+        accessibilityHint="Shows a input search field to search your posts"
+        accessibilityRole="menuitem"
+      />
     </Drawer.Navigator>
   );
 };
@@ -98,11 +130,14 @@ const StackScreen = () => {
                   icon={<Icon name="call-outline" size={30} color="#0E2A25" />}
                   iconRight
                   type="clear"
+                  accessible={true}
+                  accessibilityLabel="Call Button"
+                  accessibilityHint="Lets you call the operator"
+                  accessibilityRole="button"
                 />
               ),
               headerLeft: () => (
                 <Button
-                  // Need some work
                   onPress={() =>
                     navigation.dispatch(DrawerActions.toggleDrawer())
                   }
@@ -117,6 +152,10 @@ const StackScreen = () => {
                   }
                   iconRight
                   type="clear"
+                  accessible={true}
+                  accessibilityLabel="Menu Button"
+                  accessibilityHint="Lets you open the menu drawer"
+                  accessibilityRole="button"
                 />
               ),
             })}
@@ -125,7 +164,7 @@ const StackScreen = () => {
             name="Modify"
             component={Modify}
             options={{
-              title: 'My Posts',
+              title: 'Edit post',
               headerStyle: {
                 backgroundColor: '#FEFEF2',
               },

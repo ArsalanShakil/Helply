@@ -54,12 +54,26 @@ const Login = ({navigation}) => {
               <Card containerStyle={styles.card}>
                 {formToggle ? (
                   <>
-                    <Card.Title style={styles.title}>Login</Card.Title>
+                    <Card.Title
+                      style={styles.title}
+                      accessible={true}
+                      accessibilityLabel="Login page"
+                      accessibilityHint="Lets you login to the app"
+                    >
+                      Login
+                    </Card.Title>
                     <LoginForm navigation={navigation} />
                   </>
                 ) : (
                   <>
-                    <Card.Title style={styles.title}>Register</Card.Title>
+                    <Card.Title
+                      style={styles.title}
+                      accessible={true}
+                      accessibilityLabel="Sign Up page"
+                      accessibilityHint="Lets you register to the app"
+                    >
+                      Register
+                    </Card.Title>
                     <RegisterForm navigation={navigation} />
                   </>
                 )}

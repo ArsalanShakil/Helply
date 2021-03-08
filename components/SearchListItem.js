@@ -50,6 +50,10 @@ const SearchListItem = ({navigation, singleMedia, isSearchFile}) => {
           onPress={() => {
             navigation.navigate('Single', {file: singleMedia});
           }}
+          accessible={true}
+          accessibilityLabel="Open post"
+          accessibilityHint="Opens up the post and shows more details"
+          accessibilityRole="button"
         >
           <Avatar
             size="xlarge"
@@ -61,15 +65,26 @@ const SearchListItem = ({navigation, singleMedia, isSearchFile}) => {
                   }
                 : require('../assets/play.jpg')
             }
+            accessible={true}
+            accessibilityLabel="Avatar"
+            accessibilityHint="Preview of the media of the post"
           ></Avatar>
           <RNEListItem.Content>
             <RNEListItem.Title
               text
               style={{fontSize: 16, fontWeight: '400', paddingBottom: 16}}
+              accessible={true}
+              accessibilityLabel="Post title"
+              accessibilityHint="Title of the post"
             >
               {singleMedia.title}
             </RNEListItem.Title>
-            <RNEListItem.Subtitle style={{fontSize: 16}}>
+            <RNEListItem.Subtitle
+              style={{fontSize: 16}}
+              accessible={true}
+              accessibilityLabel="Post description"
+              accessibilityHint="Description of the post"
+            >
               {singleMedia.description}
             </RNEListItem.Subtitle>
 
@@ -94,6 +109,10 @@ const SearchListItem = ({navigation, singleMedia, isSearchFile}) => {
                   iconRight
                   type="clear"
                   onPress={() => navigation.push('Modify', {file: singleMedia})}
+                  accessible={true}
+                  accessibilityLabel="Modify post"
+                  accessibilityHint="Lets you modify the content of the  post"
+                  accessibilityRole="button"
                 ></Button>
                 <Button
                   title=""
@@ -109,6 +128,10 @@ const SearchListItem = ({navigation, singleMedia, isSearchFile}) => {
                   type="clear"
                   color="red"
                   onPress={doDelete}
+                  accessible={true}
+                  accessibilityLabel="Delete post"
+                  accessibilityHint="Deletes the post"
+                  accessibilityRole="button"
                 ></Button>
               </View>
             </>

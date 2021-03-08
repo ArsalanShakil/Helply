@@ -36,6 +36,10 @@ const Search = ({navigation}) => {
           placeholder="search"
           onChangeText={(text) => onChangeText(text)}
           value={value}
+          accessible={true}
+          accessibilityLabel="Search"
+          accessibilityHint="Lets you input text to search up your posts"
+          accessibilityRole="search"
         />
         <Icon
           name="search"

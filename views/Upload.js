@@ -190,18 +190,24 @@ const Upload = ({navigation}) => {
             </>
           )}
           <Input
-            placeholder="title"
+            placeholder="add title"
             value={inputs.title}
             onChangeText={(txt) => handleInputChange('title', txt)}
             errorMessage={uploadErrors.title}
             inputContainerStyle={{borderBottomWidth: 0, padding: 16}}
+            accessible={true}
+            accessibilityLabel="Input title"
+            accessibilityHint="lets you input a title for your post"
           />
           <Input
-            placeholder="description"
+            placeholder="add description"
             value={inputs.description}
             onChangeText={(txt) => handleInputChange('description', txt)}
             errorMessage={uploadErrors.description}
             inputContainerStyle={{borderBottomWidth: 0, paddingLeft: 16}}
+            accessible={true}
+            accessibilityLabel="Input description"
+            accessibilityHint="lets you input a description for your post"
           />
           <Card.Divider />
           <Button
@@ -219,6 +225,10 @@ const Upload = ({navigation}) => {
             onPress={() => pickImage('library')}
             titleStyle={styles.buttonTitle}
             containerStyle={{marginRight: 150}}
+            accessible={true}
+            accessibilityLabel="Open library"
+            accessibilityHint="Open the library to choose media"
+            accessibilityRole="button"
           />
           <Button
             title="Take photo"
@@ -235,6 +245,10 @@ const Upload = ({navigation}) => {
             onPress={() => pickImage('photo')}
             titleStyle={styles.buttonTitle}
             containerStyle={{marginRight: 157}}
+            accessible={true}
+            accessibilityLabel="Take photo"
+            accessibilityHint="Opens the camera to take a picture"
+            accessibilityRole="button"
           />
           <Button
             title="Take video"
@@ -251,6 +265,10 @@ const Upload = ({navigation}) => {
             onPress={() => pickImage('video')}
             titleStyle={styles.buttonTitle}
             containerStyle={{marginRight: 155}}
+            accessible={true}
+            accessibilityLabel="Take vidoe"
+            accessibilityHint="Opens the camera to take a video"
+            accessibilityRole="button"
           />
           <Button
             title={recording ? 'Stop Recording' : 'Start Recording'}
@@ -267,6 +285,10 @@ const Upload = ({navigation}) => {
             type="clear"
             titleStyle={styles.buttonTitle}
             containerStyle={{marginRight: 125}}
+            accessible={true}
+            accessibilityLabel="Record audio"
+            accessibilityHint="Opens the mic to record audio"
+            accessibilityRole="button"
           />
           {isUploading && <ActivityIndicator size="large" color="#0E2A25" />}
 
@@ -292,6 +314,10 @@ const Upload = ({navigation}) => {
               paddingLeft: 16,
             }}
             buttonStyle={{marginRight: '53%', backgroundColor: '#0E2A25'}}
+            accessible={true}
+            accessibilityLabel="Upload media"
+            accessibilityHint="Uploads the content of the post"
+            accessibilityRole="button"
           />
           <Button
             title="Reset"
@@ -308,6 +334,10 @@ const Upload = ({navigation}) => {
             onPress={doReset}
             titleStyle={styles.buttonTitle}
             containerStyle={{marginRight: '65%'}}
+            accessible={true}
+            accessibilityLabel="Reset"
+            accessibilityHint="Resets the content of the post to nothing"
+            accessibilityRole="button"
           />
         </Card>
       </KeyboardAvoidingView>

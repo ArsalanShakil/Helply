@@ -61,15 +61,27 @@ const ListItem = ({navigation, singleMedia, isMyFile}) => {
             : require('../assets/play.jpg')
         }
         style={{width: 360, height: 300}}
+        accessible={true}
+        accessibilityLabel="Media"
+        accessibilityHint="Preview of the media of the post"
+        accessibilityRole="image"
       ></Image>
       <RNEListItem.Content style={{alignItems: 'center'}}>
         <RNEListItem.Title
           text
           style={{padding: 16, fontSize: 20, fontWeight: '400'}}
+          accessible={true}
+          accessibilityLabel="Post title"
+          accessibilityHint="Title of the post"
         >
           {singleMedia.title}
         </RNEListItem.Title>
-        <RNEListItem.Subtitle style={{paddingBottom: 32, fontSize: 18}}>
+        <RNEListItem.Subtitle
+          style={{paddingBottom: 32, fontSize: 18}}
+          accessible={true}
+          accessibilityLabel="Post description"
+          accessibilityHint="Description of the post"
+        >
           {singleMedia.description}
         </RNEListItem.Subtitle>
         {isMyFile && (
@@ -88,6 +100,9 @@ const ListItem = ({navigation, singleMedia, isMyFile}) => {
                 iconRight
                 type="clear"
                 onPress={() => navigation.push('Modify', {file: singleMedia})}
+                accessibilityLabel="Modify post"
+                accessibilityHint="Lets you modify the content of the  post"
+                accessibilityRole="button"
               ></Button>
               <Button
                 title=""
@@ -102,6 +117,10 @@ const ListItem = ({navigation, singleMedia, isMyFile}) => {
                 iconRight
                 type="clear"
                 onPress={doDelete}
+                accessible={true}
+                accessibilityLabel="Delete post"
+                accessibilityHint="Deletes the post"
+                accessibilityRole="button"
               ></Button>
             </View>
           </>

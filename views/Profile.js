@@ -38,7 +38,12 @@ const Profile = ({navigation}) => {
   }, []);
 
   return (
-    <ScrollView style={{backgroundColor: '#f5e4d5'}}>
+    <ScrollView
+      style={{backgroundColor: '#f5e4d5'}}
+      accessible={true}
+      accessibilityLabel="Profile Screen"
+      accessibilityHint="Shows all the details about your profile"
+    >
       <Card containerStyle={styles.card}>
         <ImageBackground
           source={require('../assets/bg.jpg')}
@@ -60,19 +65,40 @@ const Profile = ({navigation}) => {
           />
         </ImageBackground>
         <Card.Title>
-          <Text style={{fontSize: 26, color: '#0E2A25'}}>{user.username}</Text>
+          <Text
+            style={{fontSize: 26, color: '#0E2A25'}}
+            accessible={true}
+            accessibilityLabel="Username"
+            accessibilityHint="Your username"
+          >
+            {user.username}
+          </Text>
         </Card.Title>
         <ListItem containerStyle={styles.content}>
           <Avatar
             icon={{name: 'mail', color: '#0E2A25', type: 'ionicon', size: 24}}
           />
-          <Text style={styles.text}>{user.email}</Text>
+          <Text
+            style={styles.text}
+            accessible={true}
+            accessibilityLabel="Email"
+            accessibilityHint="Your email"
+          >
+            {user.email}
+          </Text>
         </ListItem>
         <ListItem containerStyle={styles.content}>
           <Avatar
             icon={{name: 'person', type: 'ionicon', color: '#0E2A25', size: 24}}
           />
-          <Text style={styles.text}>{user.full_name}</Text>
+          <Text
+            style={styles.text}
+            accessible={true}
+            accessibilityLabel="Fullname"
+            accessibilityHint="Your fullname"
+          >
+            {user.full_name}
+          </Text>
         </ListItem>
         <ListItem
           containerStyle={styles.content}
@@ -83,7 +109,15 @@ const Profile = ({navigation}) => {
             icon={{name: 'images', color: '#0E2A25', type: 'ionicon', size: 24}}
           />
           <ListItem.Content>
-            <ListItem.Title style={styles.text}>My Posts</ListItem.Title>
+            <ListItem.Title
+              style={styles.text}
+              accessible={true}
+              accessibilityLabel="Your posts"
+              accessibilityHint="Displays all your posts"
+              accessibilityRole="button"
+            >
+              My Posts
+            </ListItem.Title>
           </ListItem.Content>
           <ListItem.Chevron />
         </ListItem>
@@ -101,7 +135,15 @@ const Profile = ({navigation}) => {
             }}
           />
           <ListItem.Content>
-            <ListItem.Title style={styles.text}>Logout</ListItem.Title>
+            <ListItem.Title
+              style={styles.text}
+              accessible={true}
+              accessibilityLabel="Logout"
+              accessibilityHint="lets you logout of your id"
+              accessibilityRole="button"
+            >
+              Logout
+            </ListItem.Title>
           </ListItem.Content>
           <ListItem.Chevron />
         </ListItem>

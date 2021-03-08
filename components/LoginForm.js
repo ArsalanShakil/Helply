@@ -36,6 +36,9 @@ const LoginForm = ({navigation}) => {
         placeholder="username"
         onChangeText={(txt) => handleInputChange('username', txt)}
         inputContainerStyle={styles.inputText}
+        accessible={true}
+        accessibilityLabel="Input Username"
+        accessibilityHint="Lets you type your username"
       />
       <FormTextInput
         autoCapitalize="none"
@@ -43,12 +46,19 @@ const LoginForm = ({navigation}) => {
         onChangeText={(txt) => handleInputChange('password', txt)}
         secureTextEntry={true}
         inputContainerStyle={styles.inputText}
+        accessible={true}
+        accessibilityLabel="Input Password"
+        accessibilityHint="Lets you input your password"
       />
       <Button
         title="Login"
         onPress={doLogin}
         loading={loading}
         buttonStyle={styles.button}
+        accessible={true}
+        accessibilityLabel="Login Button"
+        accessibilityHint="Lets you submit the username and password"
+        accessibilityRole="button"
       />
     </View>
   );
