@@ -166,7 +166,10 @@ const Upload = ({navigation}) => {
   }
 
   return (
-    <ScrollView style={{backgroundColor: '#FEFEF2'}}>
+    <ScrollView
+      keyboardShouldPersistTaps="always"
+      style={{backgroundColor: '#FEFEF2'}}
+    >
       <KeyboardAvoidingView behavior="position" enabled>
         <Card containerStyle={styles.card}>
           <Text h4 style={{color: '#0E2A25'}}>
