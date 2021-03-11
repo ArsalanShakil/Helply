@@ -54,7 +54,10 @@ const Modify = ({navigation, route}) => {
     reset();
   };
   return (
-    <ScrollView style={{backgroundColor: '#FEFEF2'}}>
+    <ScrollView
+      keyboardShouldPersistTaps="always"
+      style={{backgroundColor: '#FEFEF2'}}
+    >
       <KeyboardAvoidingView behavior="position" enabled>
         <Card containerStyle={styles.card}>
           <Text
