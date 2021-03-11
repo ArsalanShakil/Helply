@@ -107,33 +107,6 @@ const Modify = ({navigation, route}) => {
             accessibilityHint="Updates the cahnges to title of the post"
             accessibilityRole="button"
           />
-          <Button
-            title="Reset"
-            onPress={doReset}
-            icon={
-              <Icon
-                name="refresh-outline"
-                size={30}
-                color="#FEFEF2"
-                fontWeight="bold"
-              />
-            }
-            iconLeft
-            titleStyle={{
-              paddingLeft: 16,
-              color: '#FEFEF2',
-            }}
-            buttonStyle={{
-              backgroundColor: '#0E2A25',
-              borderRadius: 4,
-              marginTop: 16,
-              marginBottom: 16,
-            }}
-            accessible={true}
-            accessibilityLabel="Reset"
-            accessibilityHint="Resets the title and description to it original form"
-            accessibilityRole="button"
-          />
         </Card>
       </KeyboardAvoidingView>
     </ScrollView>
