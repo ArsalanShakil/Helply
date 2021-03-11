@@ -7,8 +7,9 @@ import {Card, Text, ListItem, Avatar} from 'react-native-elements';
 import {useTag} from '../hooks/ApiHooks';
 import {uploadsUrl} from '../utils/variables';
 import {ScrollView} from 'react-native-gesture-handler';
-import {View} from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 import {ImageBackground} from 'react-native';
+const iconSize = 30;
 
 const Profile = ({navigation}) => {
   const {isLoggedIn, setIsLoggedIn, user} = useContext(MainContext);
@@ -73,7 +74,12 @@ const Profile = ({navigation}) => {
         </Card.Title>
         <ListItem containerStyle={styles.content}>
           <Avatar
-            icon={{name: 'mail', color: '#0E2A25', type: 'ionicon', size: 24}}
+            icon={{
+              name: 'mail',
+              color: '#0E2A25',
+              type: 'ionicon',
+              size: iconSize,
+            }}
           />
           <Text
             style={styles.text}
@@ -86,7 +92,12 @@ const Profile = ({navigation}) => {
         </ListItem>
         <ListItem containerStyle={styles.content}>
           <Avatar
-            icon={{name: 'person', type: 'ionicon', color: '#0E2A25', size: 24}}
+            icon={{
+              name: 'person',
+              type: 'ionicon',
+              color: '#0E2A25',
+              size: iconSize,
+            }}
           />
           <Text
             style={styles.text}
@@ -103,7 +114,12 @@ const Profile = ({navigation}) => {
           onPress={() => navigation.push('My Files')}
         >
           <Avatar
-            icon={{name: 'images', color: '#0E2A25', type: 'ionicon', size: 24}}
+            icon={{
+              name: 'images',
+              color: '#0E2A25',
+              type: 'ionicon',
+              size: iconSize,
+            }}
           />
           <ListItem.Content>
             <ListItem.Title
@@ -128,9 +144,10 @@ const Profile = ({navigation}) => {
               name: 'log-out-outline',
               color: '#0E2A25',
               type: 'ionicon',
-              size: 24,
+              size: iconSize,
             }}
           />
+
           <ListItem.Content>
             <ListItem.Title
               style={styles.text}
@@ -163,7 +180,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#FEFEF2',
     borderColor: '#FEFEF2',
     borderRadius: 10,
-    marginTop: 8,
     borderWidth: 0,
   },
   content: {
@@ -171,7 +187,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: '#0E2A25',
-    fontSize: 16,
+    fontSize: 25,
   },
 });
 
