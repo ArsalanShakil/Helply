@@ -79,14 +79,6 @@ const SearchListItem = ({navigation, singleMedia, isSearchFile}) => {
             >
               {singleMedia.title}
             </RNEListItem.Title>
-            <RNEListItem.Subtitle
-              style={{fontSize: 16}}
-              accessible={true}
-              accessibilityLabel="Post description"
-              accessibilityHint="Description of the post"
-            >
-              {singleMedia.description}
-            </RNEListItem.Subtitle>
 
             <>
               <View

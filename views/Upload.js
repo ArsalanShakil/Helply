@@ -32,7 +32,7 @@ const Upload = ({navigation}) => {
     const formData = new FormData();
     // add text to formData
     formData.append('title', inputs.title);
-    formData.append('description', inputs.description);
+
     // add image to formData
     const filename = image.split('/').pop();
     const match = /\.(\w+)$/.exec(filename);
@@ -203,16 +203,7 @@ const Upload = ({navigation}) => {
             accessibilityLabel="Input title"
             accessibilityHint="lets you input a title for your post"
           />
-          <Input
-            placeholder="add description"
-            value={inputs.description}
-            onChangeText={(txt) => handleInputChange('description', txt)}
-            errorMessage={uploadErrors.description}
-            inputContainerStyle={{borderBottomWidth: 0, paddingLeft: 16}}
-            accessible={true}
-            accessibilityLabel="Input description"
-            accessibilityHint="lets you input a description for your post"
-          />
+
           <Card.Divider />
           <Button
             title="Upload photo"
@@ -299,11 +290,7 @@ const Upload = ({navigation}) => {
           <Button
             title="Upload file"
             onPress={doUpload}
-            disabled={
-              uploadErrors.title !== null ||
-              uploadErrors.description !== null ||
-              image === null
-            }
+            disabled={uploadErrors.title !== null || image === null}
             icon={
               <Icon
                 name="cloud-upload-outline"

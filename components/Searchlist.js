@@ -19,8 +19,7 @@ const Searchlist = ({navigation, searchFilesOnly, searchKeyword}) => {
           singleMedia={item}
           isSearchFile={
             item.user_id === user.user_id &&
-            (item.title.toLowerCase().includes(searchKeyword) ||
-              item.description.toLowerCase().includes(searchKeyword))
+            item.title.toLowerCase().includes(searchKeyword)
           }
         />
       )}

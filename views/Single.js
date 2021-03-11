@@ -351,15 +351,6 @@ const Single = ({route}) => {
           >
             {owner.username}
           </Text>
-          <Text
-            style={{width: 150, fontSize: 18}}
-            accessible={true}
-            accessibilityLabel="Post description"
-            accessibilityHint="Description of the post"
-            accessibilityRole="text"
-          >
-            {file.description}
-          </Text>
         </ListItem>
         {comment.length > 0 ? (
           <>

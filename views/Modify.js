@@ -47,7 +47,6 @@ const Modify = ({navigation, route}) => {
   useEffect(() => {
     setInputs({
       title: file.title,
-      description: file.description,
     });
   }, []);
 
@@ -79,16 +78,7 @@ const Modify = ({navigation, route}) => {
             accessibilityLabel="Edit title"
             accessibilityHint="Edit the title of the post"
           />
-          <Input
-            placeholder="description"
-            value={inputs.description}
-            onChangeText={(txt) => handleInputChange('description', txt)}
-            errorMessage={uploadErrors.description}
-            inputContainerStyle={{borderBottomWidth: 0.5, padding: 16}}
-            accessible={true}
-            accessibilityLabel="Edit description"
-            accessibilityHint="Edit the description of the post"
-          />
+
           {isUploading && <ActivityIndicator size="large" color="#0E2A25" />}
 
           <Button
@@ -112,12 +102,9 @@ const Modify = ({navigation, route}) => {
               borderRadius: 4,
               marginTop: 16,
             }}
-            // disabled={
-            //   uploadErrors.title !== null || uploadErrors.description !== null
-            // }
             accessible={true}
             accessibilityLabel="Update"
-            accessibilityHint="Updates the cahnges to title and description of the post"
+            accessibilityHint="Updates the cahnges to title of the post"
             accessibilityRole="button"
           />
           <Button
