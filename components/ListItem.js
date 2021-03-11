@@ -67,23 +67,6 @@ const ListItem = ({navigation, singleMedia, isMyFile}) => {
         accessibilityRole="image"
       ></Image>
       <RNEListItem.Content style={{alignItems: 'center'}}>
-        <RNEListItem.Title
-          text
-          style={{padding: 16, fontSize: 20, fontWeight: '400'}}
-          accessible={true}
-          accessibilityLabel="Post title"
-          accessibilityHint="Title of the post"
-        >
-          {singleMedia.title}
-        </RNEListItem.Title>
-        <RNEListItem.Subtitle
-          style={{paddingBottom: 32, fontSize: 18}}
-          accessible={true}
-          accessibilityLabel="Post description"
-          accessibilityHint="Description of the post"
-        >
-          {singleMedia.description}
-        </RNEListItem.Subtitle>
         {isMyFile && (
           <>
             <View style={{flexDirection: 'row', left: 110, paddingBottom: 24}}>
