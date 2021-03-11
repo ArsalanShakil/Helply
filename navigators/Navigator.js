@@ -36,6 +36,9 @@ const DrawerScreen = () => {
         activeTintColor: '#0E2A25',
         activeBackgroundColor: '#D4CCC4',
         inactiveTintColor: '#0E2A25',
+        labelStyle: {
+          fontSize: 25,
+        },
       }}
       screenOptions={({route}) => ({
         drawerIcon: ({focused, color, size}) => {
