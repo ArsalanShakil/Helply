@@ -36,6 +36,7 @@ const Single = ({route}) => {
   const {deleteComm} = useComment();
   const {getRating} = useRating();
   const {postRating} = useRating();
+  const {deleteRating} = useRating();
   const [videoRef, setVideoRef] = useState(null);
   const [value, onChangeText] = useState('');
 
@@ -59,23 +60,54 @@ const Single = ({route}) => {
 
   fetchRating();
   const ratingCompleted = async (rating) => {
-    const userToken = await AsyncStorage.getItem('userToken');
-    const options = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-access-token': userToken,
-      },
-      body: JSON.stringify(
-        {
-          file_id: file.file_id,
-          rating: rating,
+    if (cannotRate === true) {
+      console.log('here');
+      changeRating();
+    } else {
+      console.log('there');
+      const userToken = await AsyncStorage.getItem('userToken');
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-access-token': userToken,
         },
-        userToken
-      ),
-    };
-    postRating(options);
-    setCannotRate(true);
+        body: JSON.stringify(
+          {
+            file_id: file.file_id,
+            rating: rating,
+          },
+          userToken
+        ),
+      };
+      setCannotRate(true);
+      postRating(options);
+    }
+  };
+
+  const changeRating = () => {
+    Alert.alert(
+      'Do you',
+      ' want to change the rating?',
+      [
+        {text: 'No'},
+        {
+          text: 'Yes',
+          onPress: async () => {
+            const userToken = await AsyncStorage.getItem('userToken');
+            try {
+              await deleteRating(file.file_id, userToken);
+              setCannotRate(false);
+              setRating(0);
+              Alert.alert('Rating was deleted, you can rate again');
+            } catch (error) {
+              console.error(error);
+            }
+          },
+        },
+      ],
+      {cancelable: false}
+    );
   };
 
   // comments
@@ -294,7 +326,7 @@ const Single = ({route}) => {
             showRating
             type="star"
             ratingCount={5}
-            imageSize={30}
+            reviewSize={40}
             showRating={true}
             selectedColor="#0E2A25"
             unSelectedColor="#BDC3C7"
@@ -302,7 +334,6 @@ const Single = ({route}) => {
             reviewColor="#0E2A25"
             reviewSize={20}
             defaultRating={rating}
-            isDisabled={cannotRate}
             onFinishRating={ratingCompleted}
             accessible={true}
             accessibilityLabel="Rating"

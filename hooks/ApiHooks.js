@@ -28,7 +28,21 @@ const useRating = () => {
       };
 
       const ratingData = await doFetch(baseUrl + 'ratings/file/' + id, options);
-      console.log(ratingData);
+
+      return ratingData;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  };
+
+  const deleteRating = async (id, token) => {
+    try {
+      const options = {
+        method: 'DELETE',
+        headers: {'x-access-token': token},
+      };
+
+      const ratingData = await doFetch(baseUrl + 'ratings/file/' + id, options);
 
       return ratingData;
     } catch (error) {
@@ -39,14 +53,14 @@ const useRating = () => {
   const postRating = async (options) => {
     try {
       const result = await doFetch(baseUrl + 'ratings', options);
-      console.log(options);
+
       return result;
     } catch (error) {
       throw new Error('postRating error: ' + error.message);
     }
   };
 
-  return {getRating, postRating};
+  return {getRating, postRating, deleteRating};
 };
 
 const useLoadMedia = (myFilesOnly, userId) => {
