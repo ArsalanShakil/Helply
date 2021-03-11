@@ -6,6 +6,7 @@ import {
   Platform,
   ScrollView,
   StyleSheet,
+  View,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import {Input, Text, Image, Button, Card} from 'react-native-elements';
@@ -18,6 +19,7 @@ import {appIdentifier} from '../utils/variables';
 import {Audio, Video} from 'expo-av';
 import Icon from 'react-native-vector-icons/Ionicons';
 
+const iconSize = 70;
 const Upload = ({navigation}) => {
   const [image, setImage] = useState(null);
   const [filetype, setFiletype] = useState('');
@@ -176,6 +178,94 @@ const Upload = ({navigation}) => {
           <Text h4 style={{color: '#0E2A25'}}>
             Upload media file
           </Text>
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              flexWrap: 'wrap',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <Button
+              icon={
+                <Icon
+                  name="image-outline"
+                  size={iconSize}
+                  color="#0E2A25"
+                  fontWeight="bold"
+                />
+              }
+              iconLeft
+              type="clear"
+              onPress={() => pickImage('library')}
+              accessible={true}
+              accessibilityLabel="Open library"
+              accessibilityHint="Open the library to choose media"
+              accessibilityRole="button"
+            />
+            <Button
+              icon={
+                <Icon
+                  name="camera-outline"
+                  size={iconSize}
+                  color="#0E2A25"
+                  fontWeight="bold"
+                />
+              }
+              iconLeft
+              type="clear"
+              onPress={() => pickImage('photo')}
+              accessible={true}
+              accessibilityLabel="Take photo"
+              accessibilityHint="Opens the camera to take a picture"
+              accessibilityRole="button"
+            />
+            <Button
+              icon={
+                <Icon
+                  name="videocam-outline"
+                  size={iconSize}
+                  color="#0E2A25"
+                  fontWeight="bold"
+                />
+              }
+              iconLeft
+              type="clear"
+              onPress={() => pickImage('video')}
+              accessible={true}
+              accessibilityLabel="Take vidoe"
+              accessibilityHint="Opens the camera to take a video"
+              accessibilityRole="button"
+            />
+            <Button
+              onPress={recording ? stopRecording : startRecording}
+              icon={
+                recording ? (
+                  <Icon
+                    name="mic-off"
+                    size={iconSize}
+                    color="#0E2A25"
+                    fontWeight="bold"
+                  />
+                ) : (
+                  <Icon
+                    name="mic"
+                    size={iconSize}
+                    color="#0E2A25"
+                    fontWeight="bold"
+                  />
+                )
+              }
+              iconLeft
+              type="clear"
+              accessible={true}
+              accessibilityLabel="Record audio"
+              accessibilityHint="Opens the mic to record audio"
+              accessibilityRole="button"
+            />
+            {isUploading && <ActivityIndicator size="large" color="#0E2A25" />}
+          </View>
           {image && (
             <>
               {filetype === 'image' ? (
@@ -205,87 +295,6 @@ const Upload = ({navigation}) => {
           />
 
           <Card.Divider />
-          <Button
-            title="Upload photo"
-            icon={
-              <Icon
-                name="image-outline"
-                size={30}
-                color="#0E2A25"
-                fontWeight="bold"
-              />
-            }
-            iconLeft
-            type="clear"
-            onPress={() => pickImage('library')}
-            titleStyle={styles.buttonTitle}
-            containerStyle={{marginRight: 150}}
-            accessible={true}
-            accessibilityLabel="Open library"
-            accessibilityHint="Open the library to choose media"
-            accessibilityRole="button"
-          />
-          <Button
-            title="Take photo"
-            icon={
-              <Icon
-                name="camera-outline"
-                size={30}
-                color="#0E2A25"
-                fontWeight="bold"
-              />
-            }
-            iconLeft
-            type="clear"
-            onPress={() => pickImage('photo')}
-            titleStyle={styles.buttonTitle}
-            containerStyle={{marginRight: 157}}
-            accessible={true}
-            accessibilityLabel="Take photo"
-            accessibilityHint="Opens the camera to take a picture"
-            accessibilityRole="button"
-          />
-          <Button
-            title="Take video"
-            icon={
-              <Icon
-                name="videocam-outline"
-                size={30}
-                color="#0E2A25"
-                fontWeight="bold"
-              />
-            }
-            iconLeft
-            type="clear"
-            onPress={() => pickImage('video')}
-            titleStyle={styles.buttonTitle}
-            containerStyle={{marginRight: 155}}
-            accessible={true}
-            accessibilityLabel="Take vidoe"
-            accessibilityHint="Opens the camera to take a video"
-            accessibilityRole="button"
-          />
-          <Button
-            title={recording ? 'Stop Recording' : 'Start Recording'}
-            onPress={recording ? stopRecording : startRecording}
-            icon={
-              <Icon
-                name="mic-outline"
-                size={30}
-                color="#0E2A25"
-                fontWeight="bold"
-              />
-            }
-            iconLeft
-            type="clear"
-            titleStyle={styles.buttonTitle}
-            containerStyle={{marginRight: 125}}
-            accessible={true}
-            accessibilityLabel="Record audio"
-            accessibilityHint="Opens the mic to record audio"
-            accessibilityRole="button"
-          />
-          {isUploading && <ActivityIndicator size="large" color="#0E2A25" />}
 
           <Button
             title="Upload file"
