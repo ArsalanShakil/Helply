@@ -161,6 +161,7 @@ const Upload = ({navigation}) => {
     result = await recording.stopAndUnloadAsync();
     const uri = recording.getURI();
     setFiletype('audio');
+    Alert.alert('Audio recorded successfully');
     setImage(uri);
     // console.log('Recording stopped and stored at', uri);
   }
