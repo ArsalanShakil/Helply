@@ -175,8 +175,15 @@ const Upload = ({navigation}) => {
     >
       <KeyboardAvoidingView behavior="position" enabled>
         <Card containerStyle={styles.card}>
-          <Text h4 style={{color: '#0E2A25'}}>
-            Upload media file
+          <Text
+            style={{
+              color: '#0E2A25',
+              textAlign: 'center',
+              margin: 15,
+              fontSize: 25,
+            }}
+          >
+            Tell us about your day
           </Text>
           <View
             style={{
@@ -284,7 +291,8 @@ const Upload = ({navigation}) => {
             </>
           )}
           <Input
-            placeholder="add title"
+            placeholder="Add some text..."
+            style={{fontSize: 25}}
             value={inputs.title}
             onChangeText={(txt) => handleInputChange('title', txt)}
             errorMessage={uploadErrors.title}
@@ -297,7 +305,7 @@ const Upload = ({navigation}) => {
           <Card.Divider />
 
           <Button
-            title="Upload file"
+            title="Send"
             onPress={doUpload}
             disabled={uploadErrors.title !== null || image === null}
             icon={
@@ -312,8 +320,9 @@ const Upload = ({navigation}) => {
             titleStyle={{
               color: '#FEFEF2',
               paddingLeft: 16,
+              fontSize: 25,
             }}
-            buttonStyle={{marginRight: '53%', backgroundColor: '#0E2A25'}}
+            buttonStyle={{backgroundColor: '#0E2A25'}}
             accessible={true}
             accessibilityLabel="Upload media"
             accessibilityHint="Uploads the content of the post"
