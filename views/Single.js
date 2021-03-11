@@ -247,7 +247,7 @@ const Single = ({route}) => {
     >
       <Card containerStyle={styles.card}>
         <Card.Title
-          h4
+          h3
           accessible={true}
           accessibilityLabel="Post title"
           accessibilityHint="Title of the post"
@@ -388,7 +388,7 @@ const Single = ({route}) => {
                   icon={
                     <Icon
                       name="trash-outline"
-                      size={26}
+                      size={30}
                       color="#0E2A25"
                       fontWeight="bold"
                     />
@@ -428,6 +428,7 @@ const Single = ({route}) => {
             backgroundColor: '#f3fff2',
             paddingLeft: 20,
             borderRadius: 50,
+            fontSize: 20,
           }}
           placeholder="comment..."
           onChangeText={(text) => onChangeText(text)}
@@ -437,21 +438,20 @@ const Single = ({route}) => {
           accessibilityHint="Input comment to the post"
         />
         <Button
-          title="send comment"
+          title="Send"
           onPress={sendComment}
-          icon={<Icon name="send" size={26} color="#FEFEF2" />}
+          icon={<Icon name="send" size={30} color="#FEFEF2" />}
           iconRight
           titleStyle={{
             paddingRight: 24,
             color: '#FEFEF2',
+            fontSize: 20,
           }}
           buttonStyle={{
             backgroundColor: '#0E2A25',
             borderRadius: 10,
             marginTop: 16,
             height: 50,
-            width: 200,
-            marginLeft: '16%',
           }}
           accessible={true}
           accessibilityLabel="Submit comment"
