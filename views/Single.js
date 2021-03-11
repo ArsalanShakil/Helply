@@ -314,7 +314,7 @@ const Single = ({route}) => {
         <Card.Divider />
         <View style={styles.rating}>
           <Text
-            style={{fontSize: 16}}
+            style={{fontSize: 20}}
             accessible={true}
             accessibilityLabel="How are you feeling today?"
             accessibilityHint="Answer the question below with stars"
@@ -323,7 +323,6 @@ const Single = ({route}) => {
             How do you feel today?
           </Text>
           <AirbnbRating
-            showRating
             type="star"
             ratingCount={5}
             reviewSize={40}
@@ -332,7 +331,7 @@ const Single = ({route}) => {
             unSelectedColor="#BDC3C7"
             ratingBackgroundColor="#0E2A25"
             reviewColor="#0E2A25"
-            reviewSize={20}
+            reviewSize={0}
             defaultRating={rating}
             onFinishRating={ratingCompleted}
             accessible={true}
