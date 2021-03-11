@@ -48,10 +48,7 @@ const Profile = ({navigation}) => {
         <ImageBackground
           source={require('../assets/bg.jpg')}
           style={{
-            width: 320,
             height: 200,
-            marginLeft: -10,
-            marginTop: -10,
             marginBottom: 48,
           }}
           imageStyle={{
@@ -161,7 +158,6 @@ const styles = StyleSheet.create({
     borderWidth: 5,
     borderColor: '#FEFEF2',
     marginTop: 130,
-    marginLeft: 100,
   },
   card: {
     backgroundColor: '#FEFEF2',

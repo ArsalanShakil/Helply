@@ -58,7 +58,7 @@ const DrawerScreen = () => {
               iconName = focused ? 'search' : 'search';
               break;
           }
-          return <Icon name={iconName} size={size} color={color} />;
+          return <Icon name={iconName} size={60} color={color} />;
         },
       })}
       accessible={true}
@@ -127,7 +127,7 @@ const StackScreen = () => {
                     alert('This functionality is not availble yet!')
                   }
                   title=""
-                  icon={<Icon name="call-outline" size={30} color="#0E2A25" />}
+                  icon={<Icon name="call-outline" size={55} color="red" />}
                   iconRight
                   type="clear"
                   accessible={true}
@@ -145,7 +145,7 @@ const StackScreen = () => {
                   icon={
                     <Icon
                       name="menu-outline"
-                      size={34}
+                      size={60}
                       color="#0E2A25"
                       fontWeight="bold"
                     />
