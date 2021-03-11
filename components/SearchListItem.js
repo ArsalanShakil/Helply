@@ -6,9 +6,8 @@ import {Button} from 'react-native-elements';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useMedia} from '../hooks/SearchHooks';
 import {MainContext} from '../contexts/MainContext';
-import {Alert} from 'react-native';
+import {Alert, Image, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {View} from 'react-native';
 
 const SearchListItem = ({navigation, singleMedia, isSearchFile}) => {
   // console.log(props);
@@ -38,26 +37,25 @@ const SearchListItem = ({navigation, singleMedia, isSearchFile}) => {
     );
   };
 
-  console.log('isSearchFile: ', isSearchFile);
   return (
     <>
       {isSearchFile && (
         <RNEListItem
           bottomDivider
-          containerStyle={{
-            backgroundColor: '#FEFEF2',
-          }}
           onPress={() => {
             navigation.navigate('Single', {file: singleMedia});
+          }}
+          containerStyle={{
+            backgroundColor: '#FEFEF2',
+            flexDirection: 'column',
+            marginTop: 2,
           }}
           accessible={true}
           accessibilityLabel="Open post"
           accessibilityHint="Opens up the post and shows more details"
           accessibilityRole="button"
         >
-          <Avatar
-            size="xlarge"
-            square
+          <Image
             source={
               singleMedia.thumbnails
                 ? {
@@ -65,27 +63,21 @@ const SearchListItem = ({navigation, singleMedia, isSearchFile}) => {
                   }
                 : require('../assets/play.jpg')
             }
+            style={{width: 360, height: 300}}
             accessible={true}
-            accessibilityLabel="Avatar"
+            accessibilityLabel="Media"
             accessibilityHint="Preview of the media of the post"
-          ></Avatar>
+            accessibilityRole="image"
+          ></Image>
           <RNEListItem.Content>
-            <RNEListItem.Title
-              text
-              style={{fontSize: 16, fontWeight: '400', paddingBottom: 16}}
-              accessible={true}
-              accessibilityLabel="Post title"
-              accessibilityHint="Title of the post"
-            >
-              {singleMedia.title}
-            </RNEListItem.Title>
-
             <>
               <View
                 style={{
                   flexDirection: 'row',
-                  left: 70,
-                  paddingTop: 30,
+                  justifyContent: 'space-around',
+                  backgroundColor: 'rgba(255, 255, 255, 0.8)',
+                  marginTop: -62,
+                  width: 360,
                 }}
               >
                 <Button
@@ -93,7 +85,7 @@ const SearchListItem = ({navigation, singleMedia, isSearchFile}) => {
                   icon={
                     <Icon
                       name="create-outline"
-                      size={30}
+                      size={50}
                       color="#0E2A25"
                       fontWeight="bold"
                     />
@@ -111,7 +103,7 @@ const SearchListItem = ({navigation, singleMedia, isSearchFile}) => {
                   icon={
                     <Icon
                       name="trash-outline"
-                      size={30}
+                      size={50}
                       color="#0E2A25"
                       fontWeight="bold"
                     />
@@ -127,6 +119,15 @@ const SearchListItem = ({navigation, singleMedia, isSearchFile}) => {
                 ></Button>
               </View>
             </>
+            <RNEListItem.Title
+              text
+              style={{fontSize: 25, fontWeight: '400', paddingBottom: 16}}
+              accessible={true}
+              accessibilityLabel="Post title"
+              accessibilityHint="Title of the post"
+            >
+              {singleMedia.title}
+            </RNEListItem.Title>
           </RNEListItem.Content>
           <RNEListItem.Chevron />
         </RNEListItem>
