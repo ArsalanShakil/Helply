@@ -130,7 +130,7 @@ const StackScreen = () => {
                     alert('This functionality is not availble yet!')
                   }
                   title=""
-                  icon={<Icon name="call-outline" size={55} color="red" />}
+                  icon={<Icon name="call-outline" size={50} color="red" />}
                   iconRight
                   type="clear"
                   accessible={true}

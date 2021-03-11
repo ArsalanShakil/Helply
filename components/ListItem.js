@@ -49,7 +49,7 @@ const ListItem = ({navigation, singleMedia, isMyFile}) => {
       containerStyle={{
         backgroundColor: '#FEFEF2',
         flexDirection: 'column',
-        marginTop: 32,
+        marginTop: 2,
       }}
     >
       <Image
@@ -69,17 +69,26 @@ const ListItem = ({navigation, singleMedia, isMyFile}) => {
       <RNEListItem.Content style={{alignItems: 'center'}}>
         {isMyFile && (
           <>
-            <View style={{flexDirection: 'row', left: 110, paddingBottom: 24}}>
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-around',
+                backgroundColor: 'rgba(255, 255, 255, 0.8)',
+                marginTop: -60,
+                width: 360,
+              }}
+            >
               <Button
                 title=""
                 icon={
                   <Icon
                     name="create-outline"
-                    size={34}
+                    size={40}
                     color="#0E2A25"
                     fontWeight="bold"
                   />
                 }
+                containerStyle={{paddingRight: 160}}
                 iconRight
                 type="clear"
                 onPress={() => navigation.push('Modify', {file: singleMedia})}
@@ -92,7 +101,7 @@ const ListItem = ({navigation, singleMedia, isMyFile}) => {
                 icon={
                   <Icon
                     name="trash-outline"
-                    size={34}
+                    size={40}
                     color="#0E2A25"
                     fontWeight="bold"
                   />

@@ -27,11 +27,12 @@ const Search = ({navigation}) => {
             borderColor: '#D0DCD0',
             borderWidth: 1,
             backgroundColor: '#FEFEF2',
-            padding: 16,
+            paddingLeft: 26,
             width: 350,
             left: 15,
             borderRadius: 50,
             flex: 1,
+            fontSize: 25,
           }}
           placeholder="search"
           onChangeText={(text) => onChangeText(text)}
@@ -44,8 +45,8 @@ const Search = ({navigation}) => {
         <Icon
           name="search"
           color="#0E2A25"
-          size={30}
-          style={{right: 30, marginTop: 13}}
+          size={50}
+          style={{right: 45, marginTop: 5}}
         />
       </View>
 
