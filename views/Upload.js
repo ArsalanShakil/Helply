@@ -215,7 +215,7 @@ const Upload = ({navigation}) => {
           />
           <Card.Divider />
           <Button
-            title="Open library"
+            title="Upload photo"
             icon={
               <Icon
                 name="image-outline"
@@ -323,7 +323,7 @@ const Upload = ({navigation}) => {
             accessibilityHint="Uploads the content of the post"
             accessibilityRole="button"
           />
-          <Button
+          {/*<Button
             title="Reset"
             icon={
               <Icon
@@ -342,7 +342,7 @@ const Upload = ({navigation}) => {
             accessibilityLabel="Reset"
             accessibilityHint="Resets the content of the post to nothing"
             accessibilityRole="button"
-          />
+          />*/}
         </Card>
       </KeyboardAvoidingView>
     </ScrollView>
