@@ -56,7 +56,7 @@ const ListItem = ({navigation, singleMedia, isMyFile}) => {
         source={
           singleMedia.thumbnails
             ? {
-                uri: uploadsUrl + singleMedia.thumbnails.w160,
+                uri: uploadsUrl + singleMedia.thumbnails.w640,
               }
             : require('../assets/play.jpg')
         }
