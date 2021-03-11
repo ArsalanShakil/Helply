@@ -4,6 +4,7 @@ import {useLoadMedia} from '../hooks/ApiHooks';
 import ListItem from './ListItem';
 import PropTypes from 'prop-types';
 import {MainContext} from '../contexts/MainContext';
+import Upload from '../views/Upload';
 
 const List = ({navigation, myFilesOnly}) => {
   const {user} = useContext(MainContext);
@@ -11,6 +12,8 @@ const List = ({navigation, myFilesOnly}) => {
 
   return (
     <FlatList
+      keyboardShouldPersistTaps="always"
+      ListHeaderComponent={<Upload />}
       data={mediaArray.reverse()}
       keyExtractor={(item, index) => index.toString()}
       renderItem={({item}) => (
@@ -20,7 +23,7 @@ const List = ({navigation, myFilesOnly}) => {
           isMyFile={item.user_id === user.user_id}
         />
       )}
-    />
+    ></FlatList>
   );
 };
 

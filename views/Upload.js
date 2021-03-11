@@ -18,9 +18,12 @@ import {MainContext} from '../contexts/MainContext';
 import {appIdentifier} from '../utils/variables';
 import {Audio, Video} from 'expo-av';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {useRoute} from '@react-navigation/native';
 
 const iconSize = 70;
 const Upload = ({navigation}) => {
+  const route = useRoute();
+
   const [image, setImage] = useState(null);
   const [filetype, setFiletype] = useState('');
   const [isUploading, setIsUploading] = useState(false);
@@ -45,7 +48,7 @@ const Upload = ({navigation}) => {
       name: filename,
       type: type,
     });
-    console.log(type);
+
     try {
       setIsUploading(true);
       const userToken = await AsyncStorage.getItem('userToken');
@@ -68,7 +71,10 @@ const Upload = ({navigation}) => {
             onPress: () => {
               setUpdate(update + 1);
               doReset();
-              navigation.navigate('Home');
+
+              if (route.name !== 'Home') {
+                navigation.navigate('Home');
+              }
             },
           },
         ],
@@ -119,10 +125,7 @@ const Upload = ({navigation}) => {
       result = await ImagePicker.launchCameraAsync(source);
     }
 
-    console.log(result);
-
     if (!result.cancelled) {
-      // console.log('pickImage result', result);
       setFiletype(result.type);
       setImage(result.uri);
     }
@@ -165,7 +168,6 @@ const Upload = ({navigation}) => {
     setFiletype('audio');
     Alert.alert('Audio recorded successfully');
     setImage(uri);
-    // console.log('Recording stopped and stored at', uri);
   }
 
   return (
