@@ -8,7 +8,8 @@ const constraints = {
     },
     length: {
       minimum: 3,
-      message: 'min length is 3 characters',
+      maximum: 255,
+      message: 'min length is 3 and maximum 255 characters',
     },
   },
   description: {

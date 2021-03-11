@@ -42,7 +42,10 @@ const Login = ({navigation}) => {
   }, []);
 
   return (
-    <ScrollView contentContainerStyle={styles.sv}>
+    <ScrollView
+      keyboardShouldPersistTaps="always"
+      contentContainerStyle={styles.sv}
+    >
       <KeyboardAvoidingView
         style={styles.container}
         behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
