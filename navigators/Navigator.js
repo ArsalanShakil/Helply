@@ -4,7 +4,6 @@ import React, {useContext, useState, useEffect} from 'react';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Button} from 'react-native-elements';
-
 import {createStackNavigator} from '@react-navigation/stack';
 import {
   getFocusedRouteNameFromRoute,
@@ -24,6 +23,7 @@ import Search from '../views/Search';
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
+const iconSize = 50;
 
 const DrawerScreen = () => {
   return (
@@ -61,7 +61,7 @@ const DrawerScreen = () => {
               iconName = focused ? 'search' : 'search';
               break;
           }
-          return <Icon name={iconName} size={60} color={color} />;
+          return <Icon name={iconName} size={iconSize} color={color} />;
         },
       })}
       accessible={true}
@@ -130,7 +130,9 @@ const StackScreen = () => {
                     alert('This functionality is not availble yet!')
                   }
                   title=""
-                  icon={<Icon name="call-outline" size={50} color="red" />}
+                  icon={
+                    <Icon name="call-outline" size={iconSize} color="red" />
+                  }
                   iconRight
                   type="clear"
                   accessible={true}
@@ -148,7 +150,7 @@ const StackScreen = () => {
                   icon={
                     <Icon
                       name="menu-outline"
-                      size={60}
+                      size={iconSize}
                       color="#0E2A25"
                       fontWeight="bold"
                     />

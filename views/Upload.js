@@ -20,7 +20,7 @@ import {Audio, Video} from 'expo-av';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useRoute} from '@react-navigation/native';
 
-const iconSize = 70;
+const iconSize = 50;
 const Upload = ({navigation}) => {
   const route = useRoute();
 
