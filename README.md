@@ -11,4 +11,4 @@
 ### Login and Sign Up validation
 ![Login&SignUp](https://media.giphy.com/media/ngCDBfoBRnC3HFwhkf/giphy.gif)
 
-<img src="https://user-images.githubusercontent.com/40695548/118972019-c0fdba80-b978-11eb-8344-2e6b741f20cd.gif" width="25%">
+<img src="https://user-images.githubusercontent.com/40695548/118972019-c0fdba80-b978-11eb-8344-2e6b741f20cd.gif" width="23%">
