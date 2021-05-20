@@ -8,7 +8,7 @@
 ![Login&SignUp](https://media.giphy.com/media/ngCDBfoBRnC3HFwhkf/giphy.gif)
 
 ### Comments and Feeling
-<img src="https://user-images.githubusercontent.com/40695548/118972547-5731e080-b979-11eb-905e-dc9768d6ef24.gif" width="23%">
+<img src="https://user-images.githubusercontent.com/40695548/118972547-5731e080-b979-11eb-905e-dc9768d6ef24.gif" width="30%">
 
 ### Profile and Post
 <img src="https://user-images.githubusercontent.com/40695548/118972019-c0fdba80-b978-11eb-8344-2e6b741f20cd.gif" width="23%">
