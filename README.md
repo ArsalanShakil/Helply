@@ -1,20 +1,26 @@
 
 # Helply
-### An app that tracks your elderly loved ones daily activity to ensure they are safe and sound
+### An app that helps you monitor the health and wellbeing of your elderly loved ones.
+
+<br>
 
 ## Features
-##### - User Sign up and Login.
-##### - Update how do you feel today so your loved ones know whats up.
-##### - Upload photos, Videos and voice recordings which can be monitored.
+##### - Onboarding, user sign up and login
+##### - Mood check in feature to share with your family how you feel today
+##### - Upload photos, Videos and voice recordings which can be monitored
 ##### - Search through your posts
-##### - Emergency call button to Alert Emergency services.
-##### - Accessible 
+##### - Emergency call button to Alert Emergency services
+##### - Specially focused on accessibility based on the key user group that is elderdy
+
+<br>
 
 
-## Technologies used
+## Techn Used
 ##### - React Native
 ##### - Lottiefiles
 
+
+<br>
 
 ### Onboarding screen
 ![Onboarding](https://media.giphy.com/media/BrkXx3t2LLwZPgMYNS/giphy.gif)
